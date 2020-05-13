@@ -1,4 +1,3 @@
 # Insurance-Fraud-Detection
 
-Spring
-Django
+Spring 변경 내용 commit
