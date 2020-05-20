@@ -34,8 +34,10 @@ public interface IMemberRepository {
    List<Member> selectLimitMembers(@Param("start") int start, @Param("end") int end);
    
 // custId 값 넣기
-   void insertCustId(@Param("custManagerId") int custManagerId , @Param("custId")int custId);
+   void insertCustId(@Param("custManagerId") int custManagerId, @Param("custId")int custId);
 // custId 값 가져오기
    List<CustManager> getCustId(@Param("custManagerId") int custManagerId);
+// custId 삭제하기
+   void deleteCustId(@Param("custId")int custId);
    
 }

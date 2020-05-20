@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>QnA</h2>
           <ol>
-            <li><a href="./">Home</a></li>
+            <li><a href="ins/">Home</a></li>
             <li>QnA</li>
           </ol>
         </div>

@@ -182,7 +182,7 @@
 <script type="text/javascript">
 
 document.getElementById('header').setAttribute('class', 'fixed-top');	 
-consol.log(userId)
+console.log(userId)
 </script>
   <script type="text/javascript">
   

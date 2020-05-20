@@ -137,8 +137,5 @@ public class Cust {
 				+ ", custIncm=" + custIncm + ", rcbaseHshdIncm=" + rcbaseHshdIncm + ", jpbaseHshdIncm=" + jpbaseHshdIncm
 				+ "]";
 	}
-	
 
-	
-	
 }

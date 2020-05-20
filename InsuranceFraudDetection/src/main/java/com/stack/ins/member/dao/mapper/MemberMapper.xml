@@ -24,6 +24,15 @@
  		]]>
  	</insert>
  	
+ 	<!-- cust_id 삭제하기 -->
+ 	<delete id="deleteCustId" parameterType="map">
+ 		<![CDATA[
+ 			DELETE 
+ 			FROM CUST_MANAGER
+ 			WHERE CUST_ID = #{custId}
+ 		]]>
+ 	</delete>
+ 	
  	<!-- cust_id 가져오기  조회하기 -->
  	<select id="getCustId" parameterType="int" resultType="com.stack.ins.member.model.CustManager">
  		<![CDATA[

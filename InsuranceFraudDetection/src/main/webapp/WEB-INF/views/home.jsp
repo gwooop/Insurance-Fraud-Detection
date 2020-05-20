@@ -15,27 +15,18 @@
       <!-- Slide 1 -->
       <div class="carousel-item active">
         <div class="carousel-container">
-          <h2 class="animated fadeInDown">보험사기 <span>Moderna</span></h2>
-          <p class="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-          <a href="" class="btn-get-started animated fadeInUp">Read More</a>
+          <h2 class="animated fadeInDown">보험 사기자 판별 서비스</h2>
+          <p class="animated fadeInUp">보험사기에 대한 적발금액과 적발인원이 역대 최고 수준으로 급증하고 직업・연령・성별에 관계없이 불특정 다수의 보험소비자가 범죄라는 인식 없이 피해를 과장하거나, 사실을 왜곡하여 보험금을 청구하는 보험사기에 가담하고 있습니다. 
+          	<br>이러한 보험사기를 사전에 예방하기 위한 보험사기자 판별 서비스를 제공하는 사이트입니다.</p>
         </div>
       </div>
 
       <!-- Slide 2 -->
-      <div class="carousel-item">
+      <div class="carousel-item ">
         <div class="carousel-container">
-          <h2 class="animated fadeInDown">Lorem Ipsum Dolor</h2>
-          <p class="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-          <a href="" class="btn-get-started animated fadeInUp">Read More</a>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="carousel-item">
-        <div class="carousel-container">
-          <h2 class="animated fadeInDown">Sequi ea ut et est quaerat</h2>
-          <p class="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-          <a href="" class="btn-get-started animated fadeInUp">Read More</a>
+          <h2 class="animated fadeInDown">Insurance Fraud Detection</h2>
+          <p class="animated fadeInUp">The amount of insurance fraud and the number of people caught has rapidly increased to the highest level ever, and many unspecified insurance consumers exaggerate the damage without realizing that it is a crime or distort the facts to claim insurance fraud. I am participating.
+			This site provides insurance fraud identification services to prevent such fraud in advance.</p>
         </div>
       </div>
 
@@ -54,125 +45,51 @@
 
   <main id="main">
 
-    <!-- ======= Services Section ======= -->
-    <section class="services">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="icon-box icon-box-pink">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-box icon-box-cyan">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box icon-box-green">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box icon-box-blue">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6 video-box">
-            <img src="assets/img/why-us.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
-          </div>
-
-          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-fingerprint"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-gift"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Why Us Section -->
-
     <!-- ======= Features Section ======= -->
     <section class="features">
       <div class="container">
 
         <div class="section-title">
           <h2>Features</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>'보험사기행위'란 보험사고의 발생, 원인 또는 내용에 관하여 보험자를 기망하여 보험금을 청구하는 행위를 말한다고 <br>「보험사기방지 특별법」(2016.9.30. 시행) 제2조에서 정의하고 있습니다.</p>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="assets/img/features-1.svg" class="img-fluid" alt="">
+            <img src="assets/img/features-show1.png" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-4">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
+            <h3>2019년 보험사기 적발현황</h3>
             <ul>
-              <li><i class="icofont-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="icofont-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+              <li><i class="icofont-check"></i> '19년 중 보험사기 적발금액은 8,809억원으로 전년(7,982억원) 대비 827억원(10.4%↑) 증가(역대 최고 수준)</li>
+              <li><i class="icofont-check"></i> 적발 인원은 92,538명으로 ‘15년 이후 정체․감소추세를 보이다가 '19년 중 크게 증가(13,359명, 16.9%↑)</li>
+              <li><i class="icofont-check"></i> 대다수의 보험사기(82%)가 1인당 평균 적발금액(9.5백만원) 미만으로 비교적 소액의 보험사기</li>
             </ul>
+            <p class="font-italic">
+             	불특정 다수의 보험소비자가 상해․질병 또는 자동차사고 등의 피해를 과장하거나 사실을 왜곡하여 보험금을 청구하는 생계형 보험사기가 증가한 것으로 분석
+            </p>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5 order-1 order-md-2">
-            <img src="assets/img/features-2.svg" class="img-fluid" alt="">
+            <img src="assets/img/features-show2.png" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5 order-2 order-md-1">
-            <h3>Corporis temporibus maiores provident</h3>
+            <h3>보험 사기자 판별 서비스란?</h3>
             <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+            	보험회사의 보험설계자가 기존 또는 신규 고객들을 관리할 때<br>
+            	 그들이 보험 사기자인지 아닌지를 판별하는 서비스              
             </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
+            <ul>
+              <li><i class="icofont-check"></i> 사용 데이터 : 'H'보험회사의 약 10여년 간의 보험사기자와 일반고객으로 구분하여 구성된 데이터</li>
+            </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="assets/img/features-3.svg" class="img-fluid" alt="">
+            <img src="assets/img/features-show3.png" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5">
             <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>

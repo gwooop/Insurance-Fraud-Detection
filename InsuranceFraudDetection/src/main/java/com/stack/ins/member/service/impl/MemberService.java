@@ -86,6 +86,11 @@ public class MemberService implements IMemberService {
 	public void insertCustId(int custManagerId, int custId) {
 		memberDao.insertCustId(custManagerId, custId);
 	}
+	
+	@Override
+	public void deleteCustId(int custId) {
+		memberDao.deleteCustId(custId);
+	}
 
 	@Override
 	public List<CustManager> getCustId(int custManagerId) {

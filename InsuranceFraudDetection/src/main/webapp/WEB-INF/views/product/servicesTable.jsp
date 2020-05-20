@@ -24,29 +24,27 @@
 
     filter:  progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');  
 
-    
+}
+
+.wrap-loading div{ /*로딩 이미지*/
+
+    position: fixed;
+
+    top:50%;
+
+    left:50%;
+
+    margin-left: -21px;
+
+    margin-top: -21px;
 
 }
 
-    .wrap-loading div{ /*로딩 이미지*/
+.display-none{ /*감추기*/
 
-        position: fixed;
+    display:none;
 
-        top:50%;
-
-        left:50%;
-
-        margin-left: -21px;
-
-        margin-top: -21px;
-
-    }
-
-    .display-none{ /*감추기*/
-
-        display:none;
-
-    }
+}
 
 </style>
 <body>
@@ -58,131 +56,104 @@
 
     <section class="breadcrumbs">
       <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
           <h2>Our Services</h2>
           <ol>
-            <li><a href="./">Home</a></li>
+            <li><a href="../../">Home</a></li>
             <li>${sessionScope.userId}님환영합니다</li>
           </ol>
         </div>
-
       </div>
     </section><!-- End Our Services Section -->
 
-    <!-- ======= Services Section ======= -->
+    <!-- ======= 보험 사기자 탐색 서비스 Section ======= -->
     <section class="services">
-	<c:if test="${not empty sessionScope.userId}"> 
-		<div class="back container">
-      		<h1>보험 사기자 탐색 시스템</h1> 
-			<div align="center" class="col-md-14">
-		      <table class="table">
-		         <thead class="table-primary">
-		            <tr>
-		               <td scope="col" align="center">번호</td>
-		               <td scope="col" align="center">고객 번호</td>
-		               <td scope="col" align="center">청구 횟수</td>
-		               <td scope="col" align="center">청구 정보 입력</td>
-		               <td scope="col" align="center">사기꾼 탐색하기</td>
-		            </tr>
-		         </thead>
-		            
-		         <tbody id="custBody">
-		         <c:forEach  var="cust" items="${custList}" varStatus="status" >
-		         	<tr>
-		         		<td align="center">${status.index+1}</td>
-		         		<td align="center">${cust.custId}</td>	
-		         		<td align="center">${claimList[status.index]}</td>
-		         		<td align="center">
-		         		<button class="claimBtn btn btn-outline-primary" value="${cust.custId}">버튼</button>
-		         		</td>
-		         		<td align="center"><button class="searchBtn btn btn-outline-primary" value="${cust.custId}" id="">탐색</button></td>
-		         	</tr>
-		         </c:forEach>
-		        </tbody>
-		      </table>
-            
-   		      <div align="right">
-	      		<a href="<c:url value='/product/custServices'/>">
-	      			<button  class="btn btn-secondary">고객 정보 입력 </button>
-	      		</a>
-		      </div>
-		      </div>
-		   </div>
-
-<div class="row">
-      <div class="col-md-5">
-                   <figure class="highcharts-figure">
-          <div id="container"></div>
-          <p class="highcharts-description">
-          </p>
-         </figure>
-      </div>
-     <div class="col-md-6">
-        <p class="highcharts-description" style="height:65px" id="textArea">
-        
-       </p>
-        <div class="row">
-         <div class="col-xs-1 col-sm-4">
-
-             <figure class="highcharts-figure">
-             <div id="container2" style="height:320px"></div>
-             
-            </figure>
-         </div>
-         <div class="col-xs-1 col-sm-4">
-   
-             <figure class="highcharts-figure">
-             <div id="container3" style="height:320px"></div>
-             <p class="highcharts-description">
-             </p>
-            </figure>      
-           </div>
-         <div class="col-xs-1 col-sm-4">
-
-             <figure class="highcharts-figure">
-             <div id="container4" style="height:320px"></div>
-             <p class="highcharts-description">
-             </p>
-            </figure>
-         </div>
-        </div>
-     
-     </div>
-    </div>
-
-<div class="container show-grid">
-<div class="wrap-loading display-none">
-    <div><img src="<c:url value='/assets/img/product/100.gif'/>" /></div>
-</div> 		
-</div>	   
-		
-	</c:if>
-	</section><!-- End Services Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
-   
-     
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Service Details Section ======= -->
-    <section class="service-details">
-    </section><!-- End Service Details Section -->
-
-    <!-- ======= Pricing Section ======= -->
-    <section class="pricing section-bg" data-aos="fade-up">
-    </section><!-- End Pricing Section -->
+	  <c:if test="${not empty sessionScope.userId}"> 
+	    <div class="back container">
+	      <h1>보험 사기자 탐색 시스템</h1> 
+		  <div align="center" class="col-md-14">
+			<table class="table">
+			  <thead class="table-primary">
+			    <tr>
+			      <td scope="col" align="center">번호</td>
+			      <td scope="col" align="center">고객 번호</td>
+			      <td scope="col" align="center">청구 횟수</td>
+			      <td scope="col" align="center">청구 정보 입력</td>
+			      <td scope="col" align="center">사기꾼 탐색하기</td>
+			    </tr>
+			  </thead>
+			  <tbody id="custBody">
+			    <c:forEach  var="cust" items="${custList}" varStatus="status" >
+			      <tr>
+			        <td align="center">${status.index+1}</td>
+			        <td align="center"><a href="../custManageServices/${sessionScope.custManagerId}/${cust.custId}">${cust.custId}</a></td>	
+			        <td align="center">${claimList[status.index]}</td>
+			        <td align="center">
+			          <button class="claimBtn btn btn-outline-primary" value="${cust.custId}">버튼</button>
+			        </td>
+			        <td align="center"><button class="searchBtn btn btn-outline-primary" value="${cust.custId}" id="">탐색</button></td>
+			      </tr>
+			    </c:forEach>
+			  </tbody>
+			</table>
+	        <div align="right">
+		      <a href="<c:url value='/product/custServices'/>">
+		        <button class="btn btn-secondary">고객 정보 입력 </button>
+		      </a>
+			</div>
+		  </div>
+		</div>
+	
+		<div class="row">
+	      <div class="col-md-5">
+	        <figure class="highcharts-figure">
+	          <div id="container"></div>
+	          <p class="highcharts-description"></p>
+	        </figure>
+	      </div>
+	      <div class="col-md-6">
+	        <p class="highcharts-description" style="height:65px" id="textArea"></p>
+	        <div class="row">
+	          <div class="col-xs-1 col-sm-4">
+	       	    <figure class="highcharts-figure">
+	              <div id="container2" style="height:320px"></div>
+	            </figure>
+	          </div>
+	          <div class="col-xs-1 col-sm-4">
+	            <figure class="highcharts-figure">
+	              <div id="container3" style="height:320px"></div>
+	              <p class="highcharts-description"></p>
+	            </figure>      
+	          </div>
+	          <div class="col-xs-1 col-sm-4">
+				<figure class="highcharts-figure">
+	              <div id="container4" style="height:320px"></div>
+	              <p class="highcharts-description"></p>
+	            </figure>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+		<div class="container show-grid">
+		  <div class="wrap-loading display-none">
+	    	<div><img src="<c:url value='/assets/img/product/100.gif'/>" /></div>
+		  </div> 		
+		</div>	   
+			
+	  </c:if>
+	</section>
+	<!-- End 보험 사기자 탐색 서비스 Section -->
 
   </main><!-- End #main -->
   <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
   <jsp:include page="/WEB-INF/views/include/staticJsp.jsp"/>
     <!-- 위 코드 고정 시키기   -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-  <script type="text/javascript">
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  	<script type="text/javascript">
      document.getElementById('header').setAttribute('class', 'fixed-top');
      
      $(".claimBtn").on("click",function(){
@@ -190,9 +161,9 @@
     		var tr = claimBtn.parent().parent();
     		var td = tr.children();
     		var custId = td.eq(1).text();
-    		console.log(custId);
-    		
-    		location.href = "<c:url value='../claimServices/'/>" + custId;
+    		var custManagerId = ${sessionScope.custManagerId}
+    		    		
+    		location.href = "<c:url value='../claimServices/'/>" + custManagerId + "/" + custId;
     	})
      
     $("#test").on("click",function(){
