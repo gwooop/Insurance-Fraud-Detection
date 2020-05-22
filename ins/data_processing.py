@@ -182,12 +182,22 @@ def modeling(X_train, X_val, y_train, y_val, X_resampled, y_resampled):
     file_name = 'xgb_model.pkl'
     joblib.dump(xgb_model, file_name)
 
-    return rf_model, mlp_model, xgb_model
+    # SVM
+    from sklearn.svm import SVC
+    svm_model = SVC(random_state=42)
+    svm_model.fit(X_train, y_train)
+
+    # 객체를 pickled binary file 형태로 저장한다
+    file_name = 'svm_model.pkl'
+    joblib.dump(svm_model, file_name)
+
+    return rf_model, svm_model, xgb_model
 
 # Ensemble
-def ensemble(rf_model, xgb_model, mlp_model, X_train, y_train):
+def ensemble(rf_model, xgb_model, svm_model, X_train, y_train):
     from sklearn.ensemble import VotingClassifier
-    voting_model = VotingClassifier(estimators=[('rf', rf_model), ('xgb', xgb_model), ('mip', mlp_model)], voting='soft')
+    voting_model = VotingClassifier(estimators=[('rf', rf_model), ('xgb', xgb_model), ('svm', svm_model)], voting='soft')
+    # voting_model = VotingClassifier(estimators=[('rf', rf_model), ('xgb', xgb_model), ('svm', svm_model)], voting='soft')
     voting_model.fit(X_train, y_train)
     return voting_model
 
@@ -210,14 +220,11 @@ def prediction(test, voting_test, cust_id):
     predict_answer = voting_test.predict(X_test)
     predict_answer = pd.DataFrame(predict_answer)
     predict_result = predict_answer.iloc[0,0]
-    print(predict_result)
 
     predict_proba = voting_test.predict_proba(X_test)
     predict_proba = pd.DataFrame(predict_proba)
     predict_proba_no = round(predict_proba.iloc[0,0]*100, 2)
     predict_proba_yes = round(predict_proba.iloc[0,1]*100, 2)
-    print(predict_proba_no)
-    print(predict_proba_yes)
 
     # predict = {
     #     'CUST_ID' : cust_id,
@@ -236,8 +243,9 @@ def prediction(test, voting_test, cust_id):
     predict_siu = predict.to_json(orient='records')
     return predict_siu
 
-
-
-
-
-
+def importance(train, model):
+    imp_one = pd.DataFrame(data=np.c_[train.columns.values, model.feature_importances_],
+                           columns=['variable', 'importance'])
+    imp_one.sort_values(by='importance', ascending=False, inplace=True)
+    imp_one['cum_sum'] = np.cumsum(imp_one.importance)
+    print(imp_one)
