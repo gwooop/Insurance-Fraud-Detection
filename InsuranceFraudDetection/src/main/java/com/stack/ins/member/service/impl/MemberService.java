@@ -98,6 +98,18 @@ public class MemberService implements IMemberService {
 		return memberDao.getCustId(custManagerId);
 	}
 
+	@Override
+	public int getAllCountCustId(int custManagerId) {
+		return memberDao.getAllCountCustId(custManagerId);
+	}
+
+	@Override
+	public List<CustManager> getLimitCustId(int custManagerId, int start, int end) {
+		return memberDao.getLimitCustId(custManagerId, start, end);
+	}
+
+
+
 
 
 }

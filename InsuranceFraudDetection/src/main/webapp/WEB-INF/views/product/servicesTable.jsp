@@ -6,46 +6,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
-<style type="text/css" >
-
-.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
-
-    position: fixed;
-
-    left:0;
-
-    right:0;
-
-    top:0;
-
-    bottom:0;
-
-    background: rgba(0,0,0,0.2); /*not in ie */
-
-    filter:  progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');  
-
+<link href="<c:url value='/assets/css/product/style.css'/>" rel="stylesheet"/>
+<style>
+.pagination {
+   justify-content: center;
 }
-
-.wrap-loading div{ /*로딩 이미지*/
-
-    position: fixed;
-
-    top:50%;
-
-    left:50%;
-
-    margin-left: -21px;
-
-    margin-top: -21px;
-
-}
-
-.display-none{ /*감추기*/
-
-    display:none;
-
-}
-
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -85,26 +50,65 @@
 			  <tbody id="custBody">
 			    <c:forEach  var="cust" items="${custList}" varStatus="status" >
 			      <tr>
-			        <td align="center">${status.index+1}</td>
-			        <td align="center"><a href="../custManageServices/${sessionScope.custManagerId}/${cust.custId}">${cust.custId}</a></td>	
+			        <td align="center">${cust.rownum}</td>
+			        <td align="center"><a href="<c:url value='/product/custManageServices/${sessionScope.userId}/${sessionScope.custManagerId}/${cust.custId}/1'/>">${cust.custId}</a></td>
+			        				  	
 			        <td align="center">${claimList[status.index]}</td>
 			        <td align="center">
-			          <button class="claimBtn btn btn-outline-primary" value="${cust.custId}">버튼</button>
+			          <button class="claimBtn btn btn-outline-primary" value="${cust.custId}">입력</button>
 			        </td>
 			        <td align="center"><button class="searchBtn btn btn-outline-primary" value="${cust.custId}" id="">탐색</button></td>
 			      </tr>
 			    </c:forEach>
 			  </tbody>
 			</table>
-	        <div align="right">
-		      <a href="<c:url value='/product/custServices'/>">
-		        <button class="btn btn-secondary">고객 정보 입력 </button>
-		      </a>
+				<div >
+					<nav aria-label="Page navigation example" >
+					    <c:set var="countList" value="10"></c:set>
+					    <c:set var="countPage" value="10"></c:set>
+					    <c:set var="currentPage" value="${currentPage}"></c:set>
+					    <c:set var="stratPage" value="${((currentPage -1)/10)*10+1}"></c:set>
+					    <c:set var="endPage" value="${stratPage + countPage -1}"></c:set>
+					 	<c:set var="totalPage" value="${custCount/countList}"></c:set>
+					 	<%-- <fmt:formatNumber value="${totalPage+(1-(totalPage%1))%1}" type="number"/>  --%>
+					 	<c:if test="${endPage > totalPage}">
+					 		<c:set var="endPage" value="${totalPage}"></c:set>
+										
+					 	</c:if>
+					  <ul class="pagination">
+					    <li class="page-item">
+					   <c:if test="${currentPage == 1}">
+					    <a class="page-link disabled"aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					   </c:if>
+					  <c:if test="${currentPage != 1}">
+					      <a class="page-link" href="<c:url value='/product/services/${sessionScope.custManagerId}/1'/>" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					   </c:if>
+					    </li>
+					 	<c:if test="${custCount%countList > 0}">
+					 		<c:set var="totalPage" value="${totalPage+1}"></c:set>
+					 	</c:if>
+					    <c:forEach var="i" begin="1" end="${totalPage}">
+					    	<li class="page-item"><a class="page-link" href="<c:url value='/product/services/${sessionScope.custManagerId}/${i}'/>">${i}</a></li>
+					    </c:forEach>
+					    <li class="page-item">
+					      <a class="page-link"  href="<c:url value='/product/services/${sessionScope.custManagerId}/${totalPage-(totalPage%1)}'/>" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+					</nav>
+					<div align="right">
+		      			<a href="<c:url value='/product/custServices'/>">
+					        <button class="btn btn-secondary">고객 정보 입력 </button>
+		     			</a>
+					</div>
+		  		</div>
 			</div>
-		  </div>
-		</div>
-	
-		<div class="row">
+		<div class="row" >
 	      <div class="col-md-5">
 	        <figure class="highcharts-figure">
 	          <div id="container"></div>
@@ -146,40 +150,27 @@
 	<!-- End 보험 사기자 탐색 서비스 Section -->
 
   </main><!-- End #main -->
-  <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-  <jsp:include page="/WEB-INF/views/include/staticJsp.jsp"/>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/include/staticJsp.jsp"/>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!-- <script src=<c:url value="/assets/js/product/product-json.js"/>></script> -->
+<script type="text/javascript">
     <!-- 위 코드 고정 시키기   -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-  	<script type="text/javascript">
-     document.getElementById('header').setAttribute('class', 'fixed-top');
+document.getElementById('header').setAttribute('class', 'fixed-top');
      
-     $(".claimBtn").on("click",function(){
-    		var claimBtn = $(this);
-    		var tr = claimBtn.parent().parent();
-    		var td = tr.children();
-    		var custId = td.eq(1).text();
-    		var custManagerId = ${sessionScope.custManagerId}
-    		    		
-    		location.href = "<c:url value='../claimServices/'/>" + custManagerId + "/" + custId;
-    	})
-     
-    $("#test").on("click",function(){
-        var cust= $("#restTest").value;
-          console.log(cust) 
-      $.ajax({
-         url:"<c:url value='/restTest/22427'/>",
-         type:"GET",
-         data:{},
-         success:function(data){
-            console.log(data);
-         }
-      })  
-   })
-   
-   $("#getCustList").on("click", function(){
+$(".claimBtn").on("click",function(){
+ 		var claimBtn = $(this);
+ 		var tr = claimBtn.parent().parent();
+ 		var td = tr.children();
+ 		var custId = td.eq(1).text();
+ 		var custManagerId = ${sessionScope.custManagerId}
+ 		    		
+ 		location.href = "<c:url value='/product/claimServices/'/>" + custManagerId + "/" + custId;
+});   
+  /*  $("#getCustList").on("click", function(){
       var custManagerId = ${sessionScope.custManagerId}
       $.ajax({
          url:"<c:url value='/product/list/'/>"+custManagerId,
@@ -200,11 +191,11 @@
             }   
          }
       })
-   })
+   }) */
    
-        $(".searchBtn").on("click", function(){
-       var checkBtn = $(this);
-       var tr = checkBtn.parent().parent();
+   $(".searchBtn").on("click", function(){
+      var checkBtn = $(this);
+      var tr = checkBtn.parent().parent();
       var td = tr.children();
       var custId = td.eq(1).text();
       console.log(custId)
@@ -213,11 +204,11 @@
          type:"GET",
          dataType:'json',
          data:{},
-         timeout:100000,
+         timeout:150000,
          beforeSend: function() {
             $('.wrap-loading').removeClass('display-none');
          },complete:function(){
-             $('.wrap-loading').addClass('display-none');  
+            $('.wrap-loading').addClass('display-none');  
          },
          success:function(result){
             console.log(result);
@@ -294,7 +285,7 @@
                   type: 'pie'
               },
               title: {
-                  text: "인공신경망",
+                  text: "SVM",
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -443,7 +434,8 @@
             
       },
       error:function(request,status,error){
-           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           /* alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); */
+           alert("다시 시도해 주세요");
         }
       })
      })

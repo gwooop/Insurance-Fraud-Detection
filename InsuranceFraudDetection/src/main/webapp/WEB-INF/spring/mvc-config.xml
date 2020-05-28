@@ -19,7 +19,7 @@
 	<!-- 컨트롤러 기본 경로 -->
 	<mvc:view-controller path="/" view-name="home"/>
 	<mvc:view-controller path="/about" view-name="about"/>
-	<mvc:view-controller path="/blog" view-name="blog"/>
+	<mvc:view-controller path="/statistic" view-name="statistic"/>
 	<mvc:view-controller path="/board" view-name="board"/>
 	<mvc:view-controller path="/contact" view-name="contact"/>
 	<mvc:view-controller path="/team" view-name="team"/>

@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form action="<c:url value='/product/custUpdate/${sessionScope.custManagerId}/${cust.custId}'/> " method="POST">
+              <form action="<c:url value='/product/custUpdate/${sessionScope.userId}/${sessionScope.custManagerId}/${cust.custId}'/> " method="POST">
                 <div class="row">
                   <div class="col-md-2 pr-1">
                     <div class="form-group">
@@ -180,8 +180,8 @@
                 </div>
                 <div class="row">
                   <div class="update ml-auto mr-auto">
-                    <button type="submit" ID="update_Btn" class="btn btn-outline-primary btn-round">확인</button>
-                    <button type="button" id="back_Btn" class="custdeleteBtn btn btn-outline-danger btn-round" >취소</button>
+                    <button type="submit" id="update_Btn" class="btn btn-outline-primary btn-round">확인</button>
+                    <button type="reset" id="back_Btn" class="custdeleteBtn btn btn-outline-danger btn-round" >리셋</button>
                   </div>
                 </div>
               </form>
@@ -199,7 +199,7 @@
       </c:forEach>
           
       <!-- CLAIM_DATA -->
-      <div class="col-md-12">
+<%--       <div class="col-md-12">
         <div class="card card-body">
           <c:forEach  var="claim" items="${claimTotal}">
           	<div class="row">
@@ -236,7 +236,7 @@
 				</div>
 			  </div>
 			</div>
-		  </c:forEach>
+		  </c:forEach> --%>
 		  <!-- END CLAIM_DATA -->
 		</div>
 	  </div>
@@ -249,13 +249,24 @@
     <!-- 위 코드 고정 시키기   -->
   <script type="text/javascript">
   	document.getElementById('header').setAttribute('class', 'fixed-top')  	
+  	$("#update_Btn").on("click", function(){
+  		
+		 if (confirm("정말 수정하시겠습니까??") == true){
+	  		 }else{//취소
+	  			 alert("수정 취소");
+	  		     return false;
+	  		}  
+  	})
   	
-  	$("#back_Btn").on("click", function () {
+  	
+  	
+/*   	$("#back_Btn").on("click", function () {
+  		var userId = '${sessionScope.userId}';
   		var custId = $("#selectcustId").text();
   		var custManagerId = ${sessionScope.custManagerId}
   		
-  		location.href = "<c:url value='/product/custManageServices/'/>" + custManagerId + "/" + custId;	
-	});
+  		location.href = "<c:url value='/product/custManageServices/'/>"+userId+"/" + custManagerId + "/" + custId;	
+	}); */
   </script>
 </body>
 </html>

@@ -58,20 +58,17 @@
 		    <table class="table table-hover table-bordered">
 			<thead>
 			<tr>
-				<!-- td class="pc"><fmt:message key="NO"/></td-->
 				<td><fmt:message key="BOARD_ID"/></td>
 				<td class="pc"><fmt:message key="WRITER"/></td>
 				<td><fmt:message key="SUBJECT"/></td>
 				<td class="pc"><fmt:message key="WRITE_DATE"/></td>
 				<td class="pc"><fmt:message key="READ_COUNT"/></td>
-				<!--td class="pc"><fmt:message key="FILE"/></td-->
 			</tr>
 			</thead>
 			<c:set var="seq" value="${(page-1)*10}" scope="page" />
 			<c:forEach var="board" items="${boardList}">
 			<tr>
 				<c:set var="seq" value="${seq + 1}" scope="page"/>
-				<!-- td class="pc">${seq}</td-->
 				<td>${board.boardId}<!-- (${board.categoryId})--></td>
 				<td class="pc">${board.writer}</td>
 				<td>
@@ -80,7 +77,6 @@
 				</td>
 				<td class="pc"><fmt:formatDate value="${board.writeDate}" pattern="YYYY-MM-dd"/></td>
 				<td class="pc">${board.readCount}</td>
-				<!-- td class="pc"><span class="glyphicon glyphicon-file"></span-->
 			</tr>
 			</c:forEach>
 			</table>

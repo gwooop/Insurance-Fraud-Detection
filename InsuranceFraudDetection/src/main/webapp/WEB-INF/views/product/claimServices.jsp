@@ -34,7 +34,7 @@
                      <div class="col-md-2 pl-1">
                       <div class="form-group">
                         <label for="custId">고객 아이디</label>
-                        <input type="number" class="form-control" placeholder="고객 아이디" value=${custId} min="0" id="custId"  name="custId">
+                        <input type="number" class="form-control" placeholder="고객 아이디" value=${custId} min="0" id="custId"  name="custId" >
                       </div>
                      </div>
                      <div class="col-md-2 pl-1">
@@ -45,7 +45,7 @@
                      </div>
                      <div class="col-md-2 pr-1">
                       <div class="form-group">
-                        <label id="acciDvsn">사고 구분</label>
+                        <label for="acciDvsn">사고 구분</label>
                         <select class="custom-select mr-sm-2" id="acciDvsn" name="acciDvsn">
 	                       	<option value="1">재해</option>
 	                       	<option value="2">교통사고</option>
@@ -63,8 +63,8 @@
 	                        <option value="4">장해</option>
 	                        <option value="5">수술</option>
 	                        <option value="6">진단</option>
-	                        <option value="7">치료</option>
-	                        <option value="9">해지/무효</option>
+	                        <option value="7" id="disoption1">치료</option>
+	                        <option value="9" id="disoption2">해지/무효</option>
 	                    </select>
 	                  </div>
 	                 </div>
@@ -98,7 +98,7 @@
                   </div>
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-success btn-round">제출하기</button>
+                      <button type="submit" class="btn btn-success btn-round" id="submitBtn">제출하기</button>
                       <button type="reset" class="btn btn-primary btn-round">리셋</button>
                     </div>
                   </div>
@@ -115,42 +115,29 @@
     <!-- 위 코드 고정 시키기   -->
   <script type="text/javascript">
      document.getElementById('header').setAttribute('class', 'fixed-top');
-    $("#test").on("click",function(){
-        var cust= $("#restTest").value;
-          console.log(cust) 
-      $.ajax({
-         url:"<c:url value='/restTest/22427'/>",
-         type:"GET",
-         data:{},
-         success:function(data){
-            console.log(data);
-         }
-      })  
-   })
-   
-   $("#getCustList").on("click", function(){
-      var custManagerId = ${sessionScope.custManagerId}
-      $.ajax({
-         url:"<c:url value='/product/list/'/>"+custManagerId,
-         type:"GET",
-         data:{},
-         success:function(data){
-            console.log(data);
-            $("#custBody").empty()
-            
-            
-            for(i =0; i <data.length; i++){
-                  var applyHTML =$("<tr scope='row'>"+
-                        "<td>"+ data[i].custId+"</td>"+
-                        "<td>"+"<button class='btn btn-info'>등록</button>" +"</td>"+
-                        "<td>"+"<button class='btn btn-info'>탐색하기</button>" +"</td>"+
-                        "</tr>")
-            $("#custBody").append(applyHTML);            
-            }   
-         }
-      })
-   })   
-   </script>
+	$('#acciDvsn').on("change", function(){
+	    var select = document.getElementById("acciDvsn");
+	    var option_value = select.options[select.selectedIndex].value;
+		if(option_value == 2){
+			$('#disoption1').prop('disabled', true)
+			$('#disoption2').prop('disabled', true)
+			var dmndvalue = $("#dmndResnCode").val()		
+			console.log(typeof(dmndvalue));
+			console.log(dmndvalue)
+			if(dmndvalue === null){
+				 
+				alert("치료, 해지/무효는 입력할 수 없습니다.");
+				$('#acciDvsn').val(1).prop('seleted', true);
+				return false 
+			}
+			
+		}else{
+			$('#disoption1').prop('disabled', false)
+			$('#disoption2').prop('disabled', false)
+		}
+		
+	})		
+ </script>
 </body>
 
 </html>

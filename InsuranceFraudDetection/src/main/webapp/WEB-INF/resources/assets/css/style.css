@@ -9,8 +9,8 @@
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
-  color: #444;
+  font-family: "Noto Sans KR", sans-serif;
+  color:#1e4356;
 }
 
 a {
@@ -23,7 +23,8 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6, .font-primary {
-  font-family: "Roboto", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+  color:#1e4356;
 }
 
 

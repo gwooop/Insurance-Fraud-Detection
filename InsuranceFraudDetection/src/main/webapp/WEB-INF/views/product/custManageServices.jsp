@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" trimDirectiveWhitespaces="true" %>
+	<%@ page contentType="text/html; charset=utf-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=utf-8" trimDirectiveWhitespaces="true" %>
@@ -6,7 +6,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+<style>
+.pagination {
+   justify-content: center;
+}
+</style>
 <body>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 
   <main id="main">
@@ -110,7 +117,7 @@
                   <div class="col-md-2 pr-1">
                     <div class="form-group">
                       <label>납입총보험료</label>
-                      <input type="number" class="form-control" value=${cust.totalPrem} id="totalPrem" name="totalPrem" readonly="readonly">
+                      <input type="number" class="form-control" value="${cust.totalPrem}" id="totalPrem" name="totalPrem" readonly="readonly">
                     </div>
                   </div>
                   <div class="col-md-2 pr-1">
@@ -191,8 +198,8 @@
               </form>
               <div class="row">
               	<div class="update ml-auto mr-auto">
-              	  <button class="custupdateBtn btn btn-primary btn-round">수정</button>
-                  <button class="custdeleteBtn btn btn-danger btn-round" >삭제</button>
+              	  <button class="custupdateBtn btn btn-primary btn-round" id="custupdateBtn">수정</button>
+                  <button class="custdeleteBtn btn btn-danger btn-round" id="custdeleteBtn">삭제</button>
                 </div>
               </div>
 <%-- 파일로 고객 정보 저장하는 form            	           
@@ -212,6 +219,7 @@
       <!-- 고객 청구 정보 확인 폼 -->
       <div class="col-md-12">
       	<div class="card card-body">
+      		  <h2 align="center"> 총 ${TotalCount }개의 청구 데이터가 존재합니다.</h2>
       	  <c:forEach  var="claim" items="${claimTotal}">
        	    <div class="row">
 			  <div class="back container">
@@ -248,8 +256,52 @@
 			  </div>
 			</div>
 		  </c:forEach>
+		  <c:if test="${TotalCount !=0 }">
+		  		<div class ="text-center">
+					<nav aria-label="Page navigation example">
+					    <c:set var="countList" value="10"></c:set>
+					    <c:set var="countPage" value="10"></c:set>
+					    <c:set var="currentPage" value="${currentPage}"></c:set>
+					    <c:set var="stratPage" value="${((currentPage -1)/10)*10+1}"></c:set>
+					    <c:set var="endPage" value="${stratPage + countPage -1}"></c:set>
+					 	<c:set var="totalPage" value="${TotalCount/countList}"></c:set>
+					 	<%-- <fmt:formatNumber value="${totalPage+(1-(totalPage%1))%1}" type="number"/>  --%>
+					 	<c:if test="${endPage > totalPage}">
+					 		<c:set var="endPage" value="${totalPage}"></c:set>
+						</c:if>
+					  <ul class="pagination" style="text-align:center;">
+					    <li class="page-item">
+					   <c:if test="${currentPage == 1}">
+					    <a class="page-link disabled"aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					   </c:if>
+					  <c:if test="${currentPage != 1}">
+					      <a class="page-link" href="<c:url value='/product/custManageServices/${sessionScope.userId}/${sessionScope.custManagerId}/${custId}/1'/>" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					   </c:if>
+					    </li>
+					 	<c:if test="${TotalCount%countList > 0}">
+					 		<c:set var="totalPage" value="${totalPage+1}"></c:set>
+					 	</c:if>
+					    <c:forEach var="i" begin="1" end="${totalPage}">
+					    	<li class="page-item"><a class="page-link" href="<c:url value='/product/custManageServices/${sessionScope.userId}/${sessionScope.custManagerId}/${custId}/${i}'/>">${i}</a></li>
+					    </c:forEach>
+					    <li class="page-item">
+					      <a class="page-link"  href="<c:url value='/product/custManageServices/${sessionScope.userId}/${sessionScope.custManagerId}/${custId}/${totalPage-(totalPage%1)}'/>" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+					</nav>
+		  		</div>
+		  	</c:if>
 		</div>
 	  </div>
+	 <input id="dialog" type="password" title="비밀번호를 입력하세요" style="display:none" value=''></input>
+
+	  
 	  <!-- END 고객 청구 정보 확인 폼 -->
 	</section>
 	<!-- End Services Section -->
@@ -257,23 +309,61 @@
   <!-- End #main -->
   <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
   <jsp:include page="/WEB-INF/views/include/staticJsp.jsp"/>
+  
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+  
     <!-- 위 코드 고정 시키기   -->
   <script type="text/javascript">
   	document.getElementById('header').setAttribute('class', 'fixed-top')
 
-  	$(".custupdateBtn").on("click", function(){
-  		var custId = $("#selectcustId").text();
+  	$("#custupdateBtn").on("click", function(){
+  		
+   		var custId = $("#selectcustId").text();
 		var custManagerId = ${sessionScope.custManagerId}
-
-		location.href = "<c:url value='../../custUpdate/'/>" + custManagerId + "/" + custId;
+		location.href = "<c:url value='/product/custUpdate/'/>"+ custManagerId + "/" + custId;
   	});
   	
-  	$(".custdeleteBtn").on("click", function () {
-  		 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-  		     document.removefrm.submit();
-  		 }else{   //취소
-  		     return false;
-  		 }
+  	$("#custdeleteBtn").on("click", function () {
+  		/*  	var password = "${password}"
+  			var userInput = prompt("당신의 비밀번호는 무엇인가요?"+"");
+	  		if(userInput == password){
+	  			 if (confirm("정말 삭제하시겠습니까??") == true){//확인
+	  	  		     document.removefrm.submit();
+	  	  		 }else{//취소
+	  	  			 alert("삭제 취소");
+	  	  		     return false;
+	  	  		 } 
+	  		}else{
+	  			alert("비밀번호가 틀렸습니다.");
+	  			return false;
+	  		} */
+	  		$('#dialog').dialog({
+	  			modal:true,
+	  			position:[800,200],
+	  			buttons:{
+	  				"삭제": function(){
+	  					var password = "${password}"
+	  					inputData = $(this).val()
+	  					if(inputData === password){
+	  						 if (confirm("정말 삭제하시겠습니까??") == true){//확인
+	  			  	  		     document.removefrm.submit();
+	  			  	  		 }else{//취소
+	  			  	  			 alert("삭제 취소");
+	  			  	  		     return false;
+	  			  	  			 $(this).dialog('close');
+	  			  	  		 } 
+	  						
+	  					}else{
+	  						alert("비밀번호가 틀립니다.");
+	  						$(this).dialog('close'); 
+	  					}
+	  				},
+	  				"취소": function(){ $(this).dialog('close');}
+	  			}
+	  		})
+	  		
   	});
   </script>
 </body>

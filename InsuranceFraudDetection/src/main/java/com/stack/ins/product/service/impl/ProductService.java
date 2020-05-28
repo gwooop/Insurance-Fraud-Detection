@@ -56,4 +56,14 @@ public class ProductService implements IProductService {
 	public void updateCustData(Cust cust) {
 		productDao.updateCustData(cust);
 	}
+
+	@Override
+	public int getAllcountClaim(int custId) {
+		return productDao.getAllcountClaim(custId);
+	}
+
+	@Override
+	public List<Claim> selectLimitClaimData(int custId, int start, int end) {
+		return productDao.selectLimitClaimData(custId, start, end);
+	}
 }

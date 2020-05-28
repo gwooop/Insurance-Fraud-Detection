@@ -39,11 +39,33 @@
 			SELECT CUST_MANAGER_ID AS "custManagerId", 
 				   CUST_ID         AS "custId"
 			FROM CUST_MANAGER
-			WHERE CUST_MANAGER_ID = #{custManagerId}	 		
+			WHERE CUST_MANAGER_ID = #{custManagerId}
+			ORDER BY CUST_ID	 		
  		]]>
  	</select>
  	
  	
+ 	<select id="getLimitCustId" parameterType="int" resultType="com.stack.ins.member.model.CustManager">
+ 		<![CDATA[
+			SELECT CUST_MANAGER_ID AS "custManagerId",
+			       CUST_ID         AS "custId",
+			       NUM             AS "rownum"
+			FROM (SELECT ROW_NUMBER() OVER (ORDER BY CUST_ID) NUM,
+			        CUST_MANAGER_ID, 
+			        CUST_ID  
+			        FROM CUST_MANAGER
+			        WHERE CUST_MANAGER_ID =#{custManagerId}
+			        ORDER BY CUST_ID)
+			WHERE NUM BETWEEN #{start} AND #{end}   		
+ 		]]>
+ 	</select>	
+ 	<!-- manager_id 의 cust_id 수 조회하기  getAllCountCustId-->
+ 	<select id="getAllCountCustId" parameterType="int" resultType="int">
+ 		<![CDATA[
+			SELECT COUNT(CUST_ID) FROM CUST_MANAGER
+			WHERE CUST_MANAGER_ID = #{custManagerId}	
+ 		]]>
+ 	</select>
  	<!--                		 SELECT                    -->
  	<!-- 특정 회원 조회하기 -->
  	<select id="selectMember" parameterType="string" resultType="com.stack.ins.member.model.Member">
@@ -85,7 +107,7 @@
  		]]>
  	</select>	
  	<!-- 패스워드 찾기 -->
- 	<select id="getPassword" parameterType="string" resultType="int">
+ 	<select id="getPassword" parameterType="string" resultType="string">
  		<![CDATA[ 
 			SELECT 
 			    PASSWORD            AS "password"

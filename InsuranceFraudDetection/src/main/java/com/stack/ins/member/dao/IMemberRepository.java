@@ -31,13 +31,19 @@ public interface IMemberRepository {
 	int getAllMemberCount(@Param("delCount") int delCount);
 	
 // 회원 명수 제안해서 가져오기
-   List<Member> selectLimitMembers(@Param("start") int start, @Param("end") int end);
+    List<Member> selectLimitMembers(@Param("start") int start, @Param("end") int end);
    
 // custId 값 넣기
-   void insertCustId(@Param("custManagerId") int custManagerId, @Param("custId")int custId);
+    void insertCustId(@Param("custManagerId") int custManagerId, @Param("custId")int custId);
 // custId 값 가져오기
-   List<CustManager> getCustId(@Param("custManagerId") int custManagerId);
+    List<CustManager> getCustId(@Param("custManagerId") int custManagerId);
+    List<CustManager> getLimitCustId(@Param("custManagerId") int custManagerId, @Param("start") int start, @Param("end") int end);
 // custId 삭제하기
-   void deleteCustId(@Param("custId")int custId);
+    void deleteCustId(@Param("custId")int custId);
+// custManager 의 cust_id 갯수 가져오기
+    int getAllCountCustId(@Param("custManagerId") int custManagerId);
+    
+    
+    
    
 }

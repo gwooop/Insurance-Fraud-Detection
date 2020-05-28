@@ -4,6 +4,7 @@ public class CustManager {
 	
 	private int custManagerId;
 	private int custId;
+	private int rownum;
 	
 	
 	public int getCustManagerId() {
@@ -18,8 +19,16 @@ public class CustManager {
 	public void setCustId(int custId) {
 		this.custId = custId;
 	}
+	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	@Override
 	public String toString() {
-		return "Cust_Manager [custManagerId=" + custManagerId + ", custId=" + custId + "]";
+		return "CustManager [custManagerId=" + custManagerId + ", custId=" + custId + ", rownum=" + rownum + "]";
 	}
+	
 }

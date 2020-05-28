@@ -52,7 +52,14 @@
 			FROM CUST_DATA 		
  		]]>
  	</select>
- 	
+ 	<!-- 특정 cust_id 의 총 갯수 가져오기 -->
+  	<select id="getAllcountClaim"  parameterType="int"  resultType="int">
+ 		<![CDATA[
+			SELECT COUNT(CUST_ID)
+			FROM CLAIM_DATA
+			WHERE CUST_ID =#{custId}
+ 		]]>
+ 	</select>
  	<!-- 고객 청구 정보 입력 -->
  	<insert id="insertClaimData" parameterType="com.stack.ins.product.model.Claim">
  	<![CDATA[
@@ -122,6 +129,26 @@
  				ID					AS "id"
  			FROM CLAIM_DATA
  			WHERE CUST_ID = #{custId}
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 하나의 고객 청구 정보 확인 -->
+ 	<select id="selectLimitClaimData" parameterType="int" resultType="com.stack.ins.product.model.Claim">
+ 		<![CDATA[
+ 			SELECT 
+ 				CUST_ID				AS "custId",
+ 				POLY_NO				AS "polyNo",
+ 				ACCI_DVSN			AS "acciDvsn",
+ 				DMND_RESN_CODE		AS "dmndResnCode",
+ 				VLID_HOSP_OTDA		AS "vlidHospOtda",
+ 				HOSP_CODE			AS "hospCode",
+ 				CHME_LICE_NO		AS "chmeLiceNo",
+ 				HEED_HOSP_YN		AS "heedHospYn",
+ 				ID					AS "id"
+ 			FROM CLAIM_DATA
+ 			WHERE CUST_ID = #{custId}
+ 			ORDER BY id
+ 			LIMIT #{start},#{end}
  		]]>
  	</select>
  	
