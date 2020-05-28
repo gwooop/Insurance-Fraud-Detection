@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   
+ <mapper namespace="com.stack.ins.product.dao.IProductRepository">
+	
+	<!-- 고객 정보 입력 -->
+	<insert id="insertCustData" parameterType="com.stack.ins.product.model.Cust">
+ 		<![CDATA[
+			INSERT INTO CUST_DATA
+			(DIVIDED_SET,SIU_CUST_YN,
+			 SEX,AGE,RESI_COST,RESI_TYPE_CODE,
+			 CTPR,OCCP_GRP_1,TOTALPREM,WEDD_YN,
+			 MATE_OCCP_GRP_1,CHLD_CNT,LTBN_CHLD_AGE,
+			 MAX_PRM,CUST_INCM,RCBASE_HSHD_INCM,JPBASE_HSHD_INCM)
+			VALUES
+			(2, null, #{sex}, #{age}, #{resiCost}, #{resiTypeCode}, #{ctpr}, #{occpGrp1}, #{totalPrem}, #{weddYn}
+			, #{mateOccpGrp1}, #{chldCnt}, #{ltbnChldAge}, #{maxPrm}, #{custIncm}, #{rcbaseHshdIncm},#{jpbaseHshdIncm});
+ 		]]>
+	</insert>
+	
+	<!-- 고객 정보 수정 -->
+	<update id="updateCustData" parameterType="com.stack.ins.product.model.Cust">
+		<![CDATA[
+			UPDATE CUST_DATA
+			SET
+				SEX = #{sex},
+				AGE = #{age},
+				RESI_COST = #{resiCost},
+				RESI_TYPE_CODE = #{resiTypeCode},
+				CTPR = #{ctpr},
+				OCCP_GRP_1 = #{occpGrp1},
+				TOTALPREM = #{totalPrem},
+				WEDD_YN = #{weddYn},
+				MATE_OCCP_GRP_1 = #{mateOccpGrp1},
+				CHLD_CNT = #{chldCnt},
+				LTBN_CHLD_AGE = #{ltbnChldAge},
+				MAX_PRM = #{maxPrm},
+				CUST_INCM = #{custIncm},
+				RCBASE_HSHD_INCM = #{rcbaseHshdIncm},
+				JPBASE_HSHD_INCM = #{jpbaseHshdIncm}			
+			WHERE 
+			 	CUST_ID = #{custId};
+		]]>
+	</update>
+ 	
+ 	<!-- 고객 중 제일 최근 CUST_ID 확인 -->
+ 	<select id="selectLastCustNumber" resultType="int">
+ 		<![CDATA[
+			SELECT MAX(CUST_ID)
+			FROM CUST_DATA 		
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 고객 청구 정보 입력 -->
+ 	<insert id="insertClaimData" parameterType="com.stack.ins.product.model.Claim">
+ 	<![CDATA[
+ 		INSERT INTO CLAIM_DATA
+ 		(CUST_ID, POLY_NO, ACCI_DVSN, DMND_RESN_CODE, VLID_HOSP_OTDA, HOSP_CODE, CHME_LICE_NO, HEED_HOSP_YN)
+ 		VALUES
+ 		(#{custId}, #{polyNo}, #{acciDvsn}, #{dmndResnCode}, #{vlidHospOtda}, #{hospCode}, #{chmeLiceNo}, #{heedHospYn});
+ 	]]>
+ 	</insert>
+ 	
+ 	<!-- 청구 정보 중 제일 최근 ID 값 확인  -->
+ 	<select id="selectLastIdNumber" resultType="int">
+ 		<![CDATA[
+			SELECT MAX(ID)
+			FROM CLAIM_DATA 		
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 고객의 청구횟수 확인 -->
+ 	<select id="selectClaimCountNumber" parameterType="int" resultType="int">
+ 		<![CDATA[
+ 			SELECT COUNT(*) AS CLAIM_COUNT 
+ 			FROM CLAIM_DATA
+			WHERE CUST_ID = #{custId}
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 하나의 고객 정보 확인 -->
+ 	<select id="selectCustData" parameterType="int" resultType="com.stack.ins.product.model.Cust">
+ 		<![CDATA[
+ 			SELECT 
+ 				CUST_ID				AS "custId",
+ 				DIVIDED_SET			AS "dividedSet",
+ 				SIU_CUST_YN			AS "siuCustYn",
+ 				SEX					AS "sex",
+ 				AGE					AS "age",
+ 				RESI_COST			AS "resiCost",
+ 				RESI_TYPE_CODE		AS "resiTypeCode",
+ 				CTPR				AS "ctpr",
+ 				OCCP_GRP_1			AS "occpGrp1",
+ 				TOTALPREM			AS "totalPrem",
+ 				WEDD_YN				AS "weddYn",
+ 				MATE_OCCP_GRP_1		AS "mateOccpGrp1",
+ 				CHLD_CNT			AS "chldCnt",
+ 				LTBN_CHLD_AGE		AS "ltbnChldAge",
+ 				MAX_PRM				AS "maxPrm",
+ 				CUST_INCM			AS "custIncm",
+ 				RCBASE_HSHD_INCM	AS "rcbaseHshdIncm",
+ 				JPBASE_HSHD_INCM	AS "jpbaseHshdIncm"
+ 			FROM CUST_DATA
+ 			WHERE CUST_ID = #{custId}
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 하나의 고객 청구 정보 확인 -->
+ 	<select id="selectClaimData" parameterType="int" resultType="com.stack.ins.product.model.Claim">
+ 		<![CDATA[
+ 			SELECT 
+ 				CUST_ID				AS "custId",
+ 				POLY_NO				AS "polyNo",
+ 				ACCI_DVSN			AS "acciDvsn",
+ 				DMND_RESN_CODE		AS "dmndResnCode",
+ 				VLID_HOSP_OTDA		AS "vlidHospOtda",
+ 				HOSP_CODE			AS "hospCode",
+ 				CHME_LICE_NO		AS "chmeLiceNo",
+ 				HEED_HOSP_YN		AS "heedHospYn",
+ 				ID					AS "id"
+ 			FROM CLAIM_DATA
+ 			WHERE CUST_ID = #{custId}
+ 		]]>
+ 	</select>
+ 	
+ </mapper>

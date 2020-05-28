@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   
+ <mapper namespace="com.stack.ins.member.dao.IMemberRepository">
+	<!--                       INSERT                      -->
+	
+	<!-- 고객 정보 넣기  -->
+ 	<insert id="insertMember" parameterType="com.stack.ins.member.model.Member">
+ 		<![CDATA[
+			INSERT INTO MEMBER
+			     (USERNUM ,USERID, NAME, PASSWORD, EMAIL, PHONE, DELETECOUNT, BIRTH, CUST_MANAGER_ID)
+			VALUES(SEQ_MEMBER.NEXTVAL, #{userId}, #{name}, #{password}, #{email}, #{phone}, 0, #{birth}, SEQ_MEMBER.NEXTVAL)    
+ 		]]>
+ 	</insert>
+ 	
+ 	<!-- cust_id 값 넣기 -->
+ 	<insert id="insertCustId" parameterType="map">
+ 		<![CDATA[
+			INSERT INTO CUST_MANAGER
+			(CUST_MANAGER_ID, CUST_ID)
+			VALUES(#{custManagerId}, #{custId})    
+ 		]]>
+ 	</insert>
+ 	
+ 	<!-- cust_id 삭제하기 -->
+ 	<delete id="deleteCustId" parameterType="map">
+ 		<![CDATA[
+ 			DELETE 
+ 			FROM CUST_MANAGER
+ 			WHERE CUST_ID = #{custId}
+ 		]]>
+ 	</delete>
+ 	
+ 	<!-- cust_id 가져오기  조회하기 -->
+ 	<select id="getCustId" parameterType="int" resultType="com.stack.ins.member.model.CustManager">
+ 		<![CDATA[
+			SELECT CUST_MANAGER_ID AS "custManagerId", 
+				   CUST_ID         AS "custId"
+			FROM CUST_MANAGER
+			WHERE CUST_MANAGER_ID = #{custManagerId}	 		
+ 		]]>
+ 	</select>
+ 	
+ 	
+ 	<!--                		 SELECT                    -->
+ 	<!-- 특정 회원 조회하기 -->
+ 	<select id="selectMember" parameterType="string" resultType="com.stack.ins.member.model.Member">
+ 		<![CDATA[
+			SELECT
+				USERNUM             AS "userNum", 
+			    USERID              AS "userId",
+			    NAME                AS "name",
+			    PASSWORD            AS "password",
+			    EMAIL               AS "email",
+			    PHONE               AS "phone",
+			    DELETECOUNT         AS "delCount",
+			    BIRTH               AS "birth",
+                INSERTDAY           AS "insertDay",
+                DELETEDAY           AS "delDay",
+                CUST_MANAGER_ID     AS "custManagerId"
+			FROM MEMBER
+			WHERE USERID = #{userId}
+ 		
+ 		]]>
+ 	</select>
+ 	<!-- 모든 회원 조회하기  -->
+ 	<select id="selectAllMembers" resultType="com.stack.ins.member.model.Member">
+ 		<![CDATA[ 
+			SELECT
+				USERNUM             AS "userNum", 
+			    USERID              AS "userId",
+			    NAME                AS "name",
+			    PASSWORD            AS "password",
+			    EMAIL               AS "email",
+			    PHONE               AS "phone",
+			    DELETECOUNT         AS "delCount",
+			    BIRTH               AS "birth",
+                INSERTDAY           AS "insertDay",
+                DELETEDAY           AS "delDay",
+                CUST_MANAGER_ID     AS "custManagerId"
+			FROM MEMBER
+			ORDER BY USERNUM
+ 		]]>
+ 	</select>	
+ 	<!-- 패스워드 찾기 -->
+ 	<select id="getPassword" parameterType="string" resultType="int">
+ 		<![CDATA[ 
+			SELECT 
+			    PASSWORD            AS "password"
+			FROM MEMBER
+			WHERE USERID = #{userId}
+ 		]]> 	
+ 	</select>
+ 	<!-- DB에서 삭제된  회원 정보 가져오기  -->
+ 	<select id="getDeleteMember" resultType="com.stack.ins.member.model.Member" parameterType="int">
+ 		<![CDATA[
+			SELECT 
+				USERNUM             AS "userNum", 
+			    USERID              AS "userId",
+			    NAME                AS "name",
+			    PASSWORD            AS "password",
+			    EMAIL               AS "email",
+			    PHONE               AS "phone",
+			    DELETECOUNT         AS "delCount",
+			    BIRTH               AS "birth",
+                INSERTDAY           AS "insertDay",
+                DELETEDAY           AS "delDay",
+                CUST_MANAGER_ID     AS "custManagerId"
+			FROM MEMBER
+			WHERE DELETECOUNT = #{delCount}
+ 		]]>
+ 	</select>
+ 	<!-- 모든 회원 수 조회  -->
+ 	<select id="getAllMemberCount" parameterType="int" resultType="int">
+ 		<![CDATA[
+ 			SELECT COUNT(DELETECOUNT) FROM MEMBER
+ 			
+ 		]]>
+ 	</select>
+ 	 	<select id="selectLimitMembers" parameterType="map"  resultType="com.stack.ins.member.model.Member">
+ 		<![CDATA[ 
+			SELECT
+				USERNUM             AS "userNum", 
+			    USERID              AS "userId",
+			    NAME                AS "name",
+			    PASSWORD            AS "password",
+			    EMAIL               AS "email",
+			    PHONE               AS "phone",
+			    DELETECOUNT         AS "delCount",
+			    BIRTH               AS "birth",
+                INSERTDAY           AS "insertDay",
+                DELETEDAY           AS "delDay",
+                CUST_MANAGER_ID     AS "custManagerId"
+			FROM MEMBER
+			WHERE USERNUM  BETWEEN  #{start} AND #{end}
+			ORDER BY USERNUM
+ 		]]>
+ 	</select>
+ 	
+ 	
+ 	<!--                           UPDATE                      -->
+ 	<!-- 회원 정보 수정하기  -->
+ 	<update id="updateMember" parameterType="com.stack.ins.member.model.Member">
+ 		<![CDATA[
+			UPDATE MEMBER
+			SET
+			    NAME = #{name}, PASSWORD = #{password},PHONE= #{phone}, EMAIL= #{email}
+			WHERE 
+			    USERID = #{userId}
+ 		]]> 	
+ 	</update>
+ 	<!--             회원 삭제하기 (DB 에서는 삭제 하지 않음) for 복구를 위함 -->
+	<update id="saveDeleteMember" parameterType="string">
+ 		<![CDATA[ 
+			UPDATE MEMBER 
+			SET
+			  DELETECOUNT = 1,
+              DELETEDAY= SYSDATE
+			WHERE 
+			  USERID = #{userId}
+ 		]]>	
+	</update>
+ 	 
+ 	<!--                             DELETE                  -->
+	<delete id="deleteMember" parameterType="com.stack.ins.member.model.Member">
+ 		<![CDATA[ 
+			DELETE FROM MEMBER
+			WHERE USERID = #{userId} 		
+ 		]]>	
+	</delete>
+	
+	
+	
+	
+
+	
+ 	
+ 	
+ 	
+ </mapper>
