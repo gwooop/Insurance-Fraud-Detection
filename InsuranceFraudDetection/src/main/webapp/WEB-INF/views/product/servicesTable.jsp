@@ -12,6 +12,9 @@
    justify-content: center;
 }
 </style>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 
@@ -63,7 +66,7 @@
 			  </tbody>
 			</table>
 				<div >
-					<nav aria-label="Page navigation example" >
+					<nav aria-label="Page navigation example"  id="focusLocation">
 					    <c:set var="countList" value="10"></c:set>
 					    <c:set var="countPage" value="10"></c:set>
 					    <c:set var="currentPage" value="${currentPage}"></c:set>
@@ -137,8 +140,10 @@
 	          </div>
 	        </div>
 	      </div>
-	    </div>
-	    
+	      
+	  	</div>
+	  	<div id="chartText" style="text-align: center;"></div>
+	 	<div id="chartdiv" style="width: 100%;height: 200px;"></div></div>   
 		<div class="container show-grid">
 		  <div class="wrap-loading display-none">
 	    	<div><img src="<c:url value='/assets/img/product/100.gif'/>" /></div>
@@ -170,29 +175,6 @@ $(".claimBtn").on("click",function(){
  		    		
  		location.href = "<c:url value='/product/claimServices/'/>" + custManagerId + "/" + custId;
 });   
-  /*  $("#getCustList").on("click", function(){
-      var custManagerId = ${sessionScope.custManagerId}
-      $.ajax({
-         url:"<c:url value='/product/list/'/>"+custManagerId,
-         type:"GET",
-         data:{},
-         success:function(data){
-            console.log(data);
-            $("#custBody").empty()
-            
-            
-            for(i =0; i <data.length; i++){
-                  var applyHTML =$("<tr scope='row'>"+
-                        "<td>"+ data[i].custId+"</td>"+
-                        "<td>"+"<button class='btn btn-info'>등록</button>" +"</td>"+
-                        "<td>"+"<button class='btn btn-info'>탐색하기</button>" +"</td>"+
-                        "</tr>")
-            $("#custBody").append(applyHTML);            
-            }   
-         }
-      })
-   }) */
-   
    $(".searchBtn").on("click", function(){
       var checkBtn = $(this);
       var tr = checkBtn.parent().parent();
@@ -208,7 +190,8 @@ $(".claimBtn").on("click",function(){
          beforeSend: function() {
             $('.wrap-loading').removeClass('display-none');
          },complete:function(){
-            $('.wrap-loading').addClass('display-none');  
+            $('.wrap-loading').addClass('display-none');
+            document.getElementById("focusLocation").scrollIntoView();
          },
          success:function(result){
             console.log(result);
@@ -217,7 +200,9 @@ $(".claimBtn").on("click",function(){
             data2 = JSON.parse(result[1])
             data3 = JSON.parse(result[2])
             data4 = JSON.parse(result[3])
-        
+        	data5 = JSON.parse(result[4])
+        	console.log(data5)
+        	/* VotingClass */
             Highcharts.chart('container', {
               chart: {
                   plotBackgroundColor: null,
@@ -277,6 +262,7 @@ $(".claimBtn").on("click",function(){
               
               }]
           });
+            /* SVM */
             Highcharts.chart('container2', {
               chart: {
                   plotBackgroundColor: null,
@@ -286,6 +272,7 @@ $(".claimBtn").on("click",function(){
               },
               title: {
                   text: "SVM",
+                  useHTML:true,
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -324,7 +311,9 @@ $(".claimBtn").on("click",function(){
                       { name: '사기꾼', y: data2[0]["YES"] },
                   ]
               }]
+ 
           });
+            /*  XGBOOST */
             Highcharts.chart('container3', {
               chart: {
                   plotBackgroundColor: null,
@@ -334,6 +323,7 @@ $(".claimBtn").on("click",function(){
               },
               title: {
                   text: "XGBOOST",
+                  useHTML:true,
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -373,7 +363,7 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
-           // -----
+           /* RANDOM FOREST */
             Highcharts.chart('container4', {
               chart: {
                   plotBackgroundColor: null,
@@ -422,7 +412,51 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
-         $("#textArea").empty() 
+           /* 인공신경망 */
+            am4core.ready(function() {
+				
+            	// Themes begin
+            	am4core.useTheme(am4themes_animated);
+            	am4core.disposeAllCharts();
+            	// Themes end
+            	$("#chartText").empty();
+				$("#chartText").append("인공신경망");
+            	var iconPath = "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+
+
+
+            	var chart = am4core.create("chartdiv", am4charts.SlicedChart);
+            	chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+            	chart.data = [{
+            	    "name": "일반인",
+            	    "value": data5[0]["NO"]},
+            	    {
+                	 "name": "사기꾼",
+                	 "value": data5[0]["YES"]}
+            	];
+
+            	var series = chart.series.push(new am4charts.PictorialStackedSeries());
+            	series.dataFields.value = "value";
+            	series.dataFields.category = "name";
+            	series.alignLabels = true;
+
+            	series.maskSprite.path = iconPath;
+            	series.ticks.template.locationX = 1;
+            	series.ticks.template.locationY = 0.5;
+                series.colors.list = [
+                    am4core.color("#007bff"),
+                    am4core.color("red"),
+                  ];
+            	series.labelsContainer.width = 200;
+
+            	chart.legend = new am4charts.Legend();
+            	chart.legend.position = "left";
+            	chart.legend.valign = "bottom";
+
+            	}); // end am4core.ready() 
+    
+       $("#textArea").empty() 
       if(data[0]["SIU_CUST_YN"] ==0){
          $("#textArea").append("<h2> 일반인일 확률이 더 높습니다. </h2>")
       
@@ -439,7 +473,6 @@ $(".claimBtn").on("click",function(){
         }
       })
      })
-     
      // Make monochrome colors
       var pieColors = (function () {
           var colors = [],

@@ -122,7 +122,7 @@ public class ProductController {
 	public String insertClaimData(Claim claim, @PathVariable int custManagerId, Model model, @PathVariable int custId){
 		// claim_data 값 넣기
 		productService.insertClaimData(claim);
-		return "redirect:/product/services/" + custManagerId;
+		return "redirect:/product/services/" + custManagerId+"/1";
 	}
 	
 //	관리하는 고객 정보 페이지
