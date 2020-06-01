@@ -36,6 +36,8 @@
         <div class="row">
           <div class="col-lg-9 entries">
 			<!-- 첫번쨰 차트 -->
+			<div><h2 style='text-align:left;' id="title">안녕!</h2></div>
+			<br>
             <article class="entry" id="chart1">
 				<h2 id="chartText" ></h2>
 				<div id="chartdiv"></div>
@@ -51,8 +53,8 @@
 			<article class="entry" id="chart3" style="display:none">
 				<div id="selectArea" style="display:none">
 					<select id="test" class="custom-select" style="width:15%">
-  						<option value="1">1</option>
-  						<option value="2">2</option>
+  						<option value="1">사기자</option>
+  						<option value="2">일반인</option>
   					</select>
 				</div>
 				<h2 id="chartText_sub2"></h2>
@@ -63,8 +65,8 @@
 			<article class="entry" id="chart4" style="display:none">
 				<div id="selectArea2" style="display:none">
 					<select id="test2" class="custom-select" style="width:15%">
-  						<option value="1">1</option>
-  						<option value="2">2</option>
+  						<option value="1">사기자</option>
+  						<option value="2">일반인</option>
   					</select>
   				</div>
 				<h2 id="chartText_sub3"></h2>
@@ -80,13 +82,16 @@
             	<div class="sidebar-item categories">
 		            <ul>
 		              <li><a href="<c:url value='/statistic'/>">실제 현황</a></li>
-		              <li><a id="cloudTag">클라우드 태그</a></li>
-		              <li><a id="dangerDocAndHos">주의 병원&의사 <span>(5)</span></a></li>
-		              <li><a id=claimBtn>사기 유형 <span>(4)</span></a></li>
-		              <li><a id="agebtn">나이<span>(6)</span></a></li>
-		              <li><a id="inforData2">기본정보(금액)<span>(4)</span></a></li>
-		              <li><a id="inforData">기본정보(기타)<span>(4)</span></a></li>
-		              <li><a id="inforData3">기본정보(기타2)<span>(4)</span></a></li>
+		              <li><a id="cloudTag">변수 중요도 탐색</a></li>
+		              <li><a id="dangerHos">유의병원<span>(2)</span></a></li>
+		              <li><a id="dangerDocAndHos">유의의사 <span>(3)</span></a></li>
+		              <li><a id="claimBtn">사기 유형 <span>(4)</span></a></li>
+		              <li><a id="agebtn">연령&성별<span>(2)</span></a></li>
+		              <li><a id="areabtn">지역&직업<span>(6)</span></a></li>
+		              <li><a id="incomeBtn">보험료&개인소득<span>(3)</span></a></li>
+		              <li><a id="arryTypeBtn">가구소득&거주지 타입<span>(4)</span></a></li>
+		              <li><a id="inforData">결혼유무&자녀비율<span>(2)</span></a></li>
+		         
 		            </ul>
 		        </div>
             </div><!-- End sidebar -->
