@@ -79,9 +79,11 @@
 			<td align="left">
 				<jk:paging categoryId="${categoryId}" totalPageCount="${totalPageCount}" nowPage="${page}"/>
 			</td>
+			<c:if test="${sessionScope.userId == 'admin' }">
 			<td align="right">
-				<a href='<c:url value="/board/write/${categoryId}"/>'><button type="button" class="btn btn-info"><fmt:message key="WRITE_NEW_ARTICLE"/></button></a>
+				<a href='<c:url value="/board/write/${categoryId}"/>'><button type="button" class="btn btn-info">새 글쓰기</button></a>
 			</td>
+			</c:if>
 		</tr>
 		</table>
 	</div>
