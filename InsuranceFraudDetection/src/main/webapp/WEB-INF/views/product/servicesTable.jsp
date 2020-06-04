@@ -7,6 +7,7 @@
 <html lang="en">
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
 <link href="<c:url value='/assets/css/product/style.css'/>" rel="stylesheet"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style>
 .pagination {
    justify-content: center;
@@ -36,6 +37,7 @@
 	  <c:if test="${not empty sessionScope.userId}"> 
 	    <div class="back container">
 	      <h1>보험 사기자 탐색 시스템</h1> 
+	      <img id="svm" src="assets/img/svm.jpg" name="svm" alt="">	
 		  <div align="center" class="col-md-14">
 			<table class="table">
 			  <thead class="table-primary">
@@ -108,7 +110,7 @@
 					</div>
 		  		</div>
 			</div>
-		<div class="row" >
+		<div class="row">
 	      <div class="col-md-5">
 	        <figure class="highcharts-figure">
 	          <div id="container"></div>
@@ -120,7 +122,7 @@
 	        <div class="row">
 	          <div class="col-xs-1 col-sm-4">
 	       	    <figure class="highcharts-figure">
-	              <div id="container2" style="height:320px"></div>
+	              <div data-toggle="tooltip" id="container2" style="height:320px"></div>	
 	            </figure>
 	          </div>
 	          <div class="col-xs-1 col-sm-4">
@@ -141,15 +143,30 @@
 	    
 		<div class="container show-grid">
 		  <div class="wrap-loading display-none">
-	    	<div><img src="<c:url value='/assets/img/product/100.gif'/>" /></div>
+	    	<div><img src="<c:url value='/assets/img/product/100.gif'/>"/></div>
 		  </div> 		
 		</div>	   
 			
 	  </c:if>
+	  <!-- 폼 레이어  -->
+	  <div id="firstpopupLayer" style="display:none">
+	  	<img id="svm" src="assets/img/svm.jpg" name="svm" alt="">	
+		Support Vector Machine<br>
+		두 집단 중 어느 하나에 속한 데이터의 집합이 주어졌을 때, SVM는 새로운 데이터가 어느 집단에 속할지 판단하는 알고리즘
+	  </div>
+  	  <div id="secondpopupLayer" style="display:none">
+		XGBOOST<br>
+		모델 예측의 오답에 대해 높은 가중치를 부여하고, 정답에 대해 낮은 가중치를 부여하는 알고리즘
+	  </div>
+  	  <div id="thirdpopupLayer" style="display:none">
+		Random Forest<br>
+		여러 결정 트리들이 내린 예측 값들 중 가장 많이 나온 값을 최종 예측값으로 정하는 알고리즘 
+	  </div>
+	  <!-- //폼 레이어  -->
 	</section>
 	<!-- End 보험 사기자 탐색 서비스 Section -->
-
   </main><!-- End #main -->
+  
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <jsp:include page="/WEB-INF/views/include/staticJsp.jsp"/>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -199,6 +216,7 @@ $(".claimBtn").on("click",function(){
       var td = tr.children();
       var custId = td.eq(1).text();
       console.log(custId)
+            
       $.ajax({
          url:"<c:url value='/restTest/'/>"+custId,
          type:"GET",
@@ -238,10 +256,10 @@ $(".claimBtn").on("click",function(){
               accessibility: {
                   point: {
                       valueSuffix: '%'
-                  }
+                  }	
               },
               plotOptions: {
-                  pie: {
+                  pie: {	
                       allowPointSelect: true,
                       cursor: 'pointer',
                       colors: pieColors,
@@ -286,6 +304,7 @@ $(".claimBtn").on("click",function(){
               },
               title: {
                   text: "SVM",
+                  useHTML:true,
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -325,6 +344,25 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
+                       
+            $('#container2 .highcharts-title').hover(function(e){
+        		$('#firstpopupLayer').css("display", "block")
+        		var sWidth = window.innerWidth;
+        		var sHeight = window.innerHeight;
+
+        		// 레이어가 나타날 위치를 셋팅한다.
+        		var divLeft = e.pageX;
+        		var divTop = e.pageY;
+				
+        		$('#firstpopupLayer').css({
+        			"top": divTop,
+        			"left": divLeft,
+        			"position": "absolute"
+        		}).show();
+            }, function(){
+            	$('#firstpopupLayer').hide()
+            });
+            
             Highcharts.chart('container3', {
               chart: {
                   plotBackgroundColor: null,
@@ -334,6 +372,7 @@ $(".claimBtn").on("click",function(){
               },
               title: {
                   text: "XGBOOST",
+                  useHTML:true,
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -373,6 +412,24 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
+            $('#container3 .highcharts-title').hover(function(e)
+            	{
+            		$('#secondpopupLayer').css("display", "block")
+            		var sWidth = window.innerWidth;
+            		var sHeight = window.innerHeight;
+
+            		// 레이어가 나타날 위치를 셋팅한다.
+            		var divLeft = e.pageX;
+            		var divTop = e.pageY;
+    				
+            		$('#secondpopupLayer').css({
+            			"top": divTop,
+            			"left": divLeft,
+            			"position": "absolute"
+            		}).show();
+                }, function(){
+                	$('#secondpopupLayer').hide()
+                });
            // -----
             Highcharts.chart('container4', {
               chart: {
@@ -383,6 +440,7 @@ $(".claimBtn").on("click",function(){
               },
               title: {
                   text: "Random Forest",
+                  useHTML:true,
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -422,6 +480,24 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
+            $('#container4 .highcharts-title').hover(function(e)
+            	{
+            		$('#thirdpopupLayer').css("display", "block")
+            		var sWidth = window.innerWidth;
+            		var sHeight = window.innerHeight;
+
+            		// 레이어가 나타날 위치를 셋팅한다.
+            		var divLeft = e.pageX;
+            		var divTop = e.pageY;
+    				
+            		$('#thirdpopupLayer').css({
+            			"top": divTop,
+            			"left": divLeft,
+            			"position": "absolute"
+            		}).show();
+                }, function(){
+                	$('#thirdpopupLayer').hide()
+                });
          $("#textArea").empty() 
       if(data[0]["SIU_CUST_YN"] ==0){
          $("#textArea").append("<h2> 일반인일 확률이 더 높습니다. </h2>")

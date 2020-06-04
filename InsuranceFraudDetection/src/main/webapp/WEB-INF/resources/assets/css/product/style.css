@@ -35,3 +35,45 @@
     display:none;
 
 }
+#firstpopupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 5px #d0d0d0;
+	width: 350px;
+	height: 150px;
+	padding: 10px;
+}
+#firstpopupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
+} 
+#secondpopupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 5px #d0d0d0;
+	width: 350px;
+	height: 150px;
+	padding: 10px;
+}
+#secondpopupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
+} 
+#thirdpopupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 5px #d0d0d0;
+	width: 350px;
+	height: 150px;
+	padding: 10px;
+}
+#thirdpopupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
+} 
