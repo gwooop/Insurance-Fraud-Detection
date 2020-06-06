@@ -43,8 +43,7 @@
     <section class="services">
 	  <c:if test="${not empty sessionScope.userId}"> 
 	    <div class="back container">
-	      <h1>보험 사기자 탐색 시스템</h1> 
-	      <img id="svm" src="assets/img/svm.jpg" name="svm" alt="">	
+	      <h1>보험 사기자 탐색 시스템</h1>	
 		  <div align="center" class="col-md-14">
 			<table class="table">
 			  <thead class="table-primary">
@@ -129,7 +128,7 @@
 	        <div class="row">
 	          <div class="col-xs-1 col-sm-4">
 	       	    <figure class="highcharts-figure">
-	              <div data-toggle="tooltip" id="container2" style="height:320px"></div>	
+	              <div id="container2" style="height:320px"></div>	
 	            </figure>
 	          </div>
 	          <div class="col-xs-1 col-sm-4">
@@ -160,19 +159,32 @@
 			
 	  </c:if>
 	  <!-- 폼 레이어  -->
-	  <div id="firstpopupLayer" style="display:none">
-	  	<img id="svm" src="assets/img/svm.jpg" name="svm" alt="">	
+	  <div id="votingpopupLayer" style="display:none">
+	  	<img src="<c:url value='/assets/img/product/voting_classifier.png'/>"/><br>
+		VotingClassifier<br>
+		여러 모델을 생성하고 그 결과를 비교한다. 각 모델의 예측을 평균내어 예측하는 알고리즘
+	  </div>
+	  <div id="svmpopupLayer" style="display:none">
+	  	<img src="<c:url value='/assets/img/product/svm_.png'/>"/><br>
 		Support Vector Machine<br>
 		두 집단 중 어느 하나에 속한 데이터의 집합이 주어졌을 때, SVM는 새로운 데이터가 어느 집단에 속할지 판단하는 알고리즘
 	  </div>
-  	  <div id="secondpopupLayer" style="display:none">
+  	  <div id="xgbpopupLayer" style="display:none">
+  	  	<img src="<c:url value='/assets/img/product/xgboost_.png'/>"/><br>
 		XGBOOST<br>
 		모델 예측의 오답에 대해 높은 가중치를 부여하고, 정답에 대해 낮은 가중치를 부여하는 알고리즘
 	  </div>
-  	  <div id="thirdpopupLayer" style="display:none">
+  	  <div id="rfpopupLayer" style="display:none">
+  	  	<img src="<c:url value='/assets/img/product/random_forest.png'/>"/><br>
 		Random Forest<br>
 		여러 결정 트리들이 내린 예측 값들 중 가장 많이 나온 값을 최종 예측값으로 정하는 알고리즘 
 	  </div>
+	  <div id="mlppopupLayer" style="display:none">
+	  	<img src="<c:url value='/assets/img/product/mlp_.png'/>"/><br>
+	  	MLPClassifier(인공신경망)<br>	
+	  	다층 퍼셉트론을 활용해 입력계층과 출력계층 사이에 은닉계층을 추가해 복잡한 문제를 해결하는 알고리즘
+	  </div>
+	  
 	  <!-- //폼 레이어  -->
 	</section>
 	<!-- End 보험 사기자 탐색 서비스 Section -->
@@ -230,6 +242,7 @@ $(".claimBtn").on("click",function(){
             data4 = JSON.parse(result[3])
         	data5 = JSON.parse(result[4])
         	console.log(data5)
+        	
         	/* VotingClass */
             Highcharts.chart('container', {
               chart: {
@@ -290,6 +303,26 @@ $(".claimBtn").on("click",function(){
               
               }]
           });
+            
+            $('#container .highcharts-title').hover(function(e){
+        		$('#votingpopupLayer').css("display", "block")
+        		var sWidth = window.innerWidth;
+        		var sHeight = window.innerHeight;
+
+        		// 레이어가 나타날 위치를 셋팅한다.
+        		var divLeft = e.pageX;
+        		var divTop = e.pageY;
+				
+        		$('#votingpopupLayer').css({
+        			"top": divTop,
+        			"left": divLeft,
+        			"position": "absolute"
+        		}).show();
+            }, function(){
+            	$('#votingpopupLayer').hide();
+            	
+            });
+            
             /* SVM */
             Highcharts.chart('container2', {
               chart: {
@@ -340,10 +373,9 @@ $(".claimBtn").on("click",function(){
               }]
  
           });
-<<<<<<< HEAD
                        
             $('#container2 .highcharts-title').hover(function(e){
-        		$('#firstpopupLayer').css("display", "block")
+        		$('#svmpopupLayer').css("display", "block")
         		var sWidth = window.innerWidth;
         		var sHeight = window.innerHeight;
 
@@ -351,46 +383,16 @@ $(".claimBtn").on("click",function(){
         		var divLeft = e.pageX;
         		var divTop = e.pageY;
 				
-        		$('#firstpopupLayer').css({
+        		$('#svmpopupLayer').css({
         			"top": divTop,
         			"left": divLeft,
         			"position": "absolute"
         		}).show();
             }, function(){
-            	$('#firstpopupLayer').hide()
+            	$('#svmpopupLayer').hide()
             });
             
-=======
-        /*     $('#container2 .highcharts-title').click(function(e)
-                    {    
-                    
-                       $('#popupLayer').prop("display", "block");
-                       var sWidth = window.innerWidth;
-                       var sHeight = window.innerHeight;
-
-                       var oWidth = $('#popupLayer').width();
-                       var oHeight = $('#popupLayer').height();
-
-                       // 레이어가 나타날 위치를 셋팅한다.
-                       var divLeft = e.clientX;
-                       var divTop = e.clientY;
-                    
-                       $('#popupLayer').css({
-                          "top": divTop,
-                          "left": divLeft,
-                          "position": "absolute"
-                       })
-                    });  */ 
-            $("#container2 .highcharts-title").hover(function(){
-      
-            	$(this).attr('class','d-inline-block');
-            	$(this).attr('title', '안녕하세요 이것은 svm 이라는 것이에요 ㅎㅎ');
-            	$(this).attr('data-toggle',"tooltip")
-            })
-            
-            
             /*  XGBOOST */
->>>>>>> refs/remotes/origin/spring_semi
             Highcharts.chart('container3', {
               chart: {
                   plotBackgroundColor: null,
@@ -440,10 +442,10 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
-<<<<<<< HEAD
+                    
             $('#container3 .highcharts-title').hover(function(e)
             	{
-            		$('#secondpopupLayer').css("display", "block")
+            		$('#xgbpopupLayer').css("display", "block")
             		var sWidth = window.innerWidth;
             		var sHeight = window.innerHeight;
 
@@ -451,18 +453,17 @@ $(".claimBtn").on("click",function(){
             		var divLeft = e.pageX;
             		var divTop = e.pageY;
     				
-            		$('#secondpopupLayer').css({
+            		$('#xgbpopupLayer').css({
             			"top": divTop,
             			"left": divLeft,
             			"position": "absolute"
             		}).show();
                 }, function(){
-                	$('#secondpopupLayer').hide()
+                	$('#xgbpopupLayer').hide()
                 });
            // -----
-=======
+           
            /* RANDOM FOREST */
->>>>>>> refs/remotes/origin/spring_semi
             Highcharts.chart('container4', {
               chart: {
                   plotBackgroundColor: null,
@@ -512,10 +513,10 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
-<<<<<<< HEAD
+           
             $('#container4 .highcharts-title').hover(function(e)
             	{
-            		$('#thirdpopupLayer').css("display", "block")
+            		$('#rfpopupLayer').css("display", "block")
             		var sWidth = window.innerWidth;
             		var sHeight = window.innerHeight;
 
@@ -523,16 +524,16 @@ $(".claimBtn").on("click",function(){
             		var divLeft = e.pageX;
             		var divTop = e.pageY;
     				
-            		$('#thirdpopupLayer').css({
+            		$('#rfpopupLayer').css({
             			"top": divTop,
             			"left": divLeft,
             			"position": "absolute"
             		}).show();
                 }, function(){
-                	$('#thirdpopupLayer').hide()
+                	$('#rfpopupLayer').hide()
                 });
          $("#textArea").empty() 
-=======
+
            /* 인공신경망 */
             am4core.ready(function() {
 				
@@ -702,12 +703,31 @@ $(".claimBtn").on("click",function(){
             		chart.cursor = new am4charts.XYCursor();
             		chart.cursor.behavior = "panX";
 
-            		}); // end am4core.ready()    	
+            		}); // end am4core.ready()    
+            		
+                    $('#chartText').hover(function(e)
+                        	{
+                        		$('#mlppopupLayer').css("display", "block")
+                        		var sWidth = window.innerWidth;
+                        		var sHeight = window.innerHeight;
+
+                        		// 레이어가 나타날 위치를 셋팅한다.
+                        		var divLeft = e.pageX;
+                        		var divTop = e.pageY;
+                				
+                        		$('#mlppopupLayer').css({
+                        			"top": divTop,
+                        			"left": divLeft,
+                        			"position": "absolute"
+                        		}).show();
+                            }, function(){
+                            	$('#mlppopupLayer').hide()
+                            });
 			            	
             	
             	
        $("#textArea").empty() 
->>>>>>> refs/remotes/origin/spring_semi
+
       if(data[0]["SIU_CUST_YN"] ==0){
          $("#textArea").append("<h2> 일반인일 확률이 더 높습니다. </h2>")
       

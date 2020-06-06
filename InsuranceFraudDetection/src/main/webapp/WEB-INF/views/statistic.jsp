@@ -36,8 +36,6 @@
         <div class="row">
           <div class="col-lg-9 entries">
 			<!-- 첫번쨰 차트 -->
-			<div><h2 style='text-align:left;' id="title">안녕!</h2></div>
-			<br>
             <article class="entry" id="chart1">
 				<h2 id="chartText" ></h2>
 				<div id="chartdiv"></div>
