@@ -29,10 +29,8 @@ public interface IMemberRepository {
 // 	회원 총 숫자 가져오기
 	int getAllMemberCount();
 	int getAllMemberCount(@Param("delCount") int delCount);
-	
 // 회원 명수 제안해서 가져오기
     List<Member> selectLimitMembers(@Param("start") int start, @Param("end") int end);
-   
 // custId 값 넣기
     void insertCustId(@Param("custManagerId") int custManagerId, @Param("custId")int custId);
 // custId 값 가져오기

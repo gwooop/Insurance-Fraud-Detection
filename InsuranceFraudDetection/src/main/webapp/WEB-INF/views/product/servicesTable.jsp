@@ -38,11 +38,11 @@
       </div>
     </section><!-- End Our Services Section -->
 
-    <!-- ======= 보험 사기자 탐색 서비스 Section ======= -->
+    <!-- ======= 보험 사기자 판별 서비스 Section ======= -->
     <section class="services">
 	  <c:if test="${not empty sessionScope.userId}"> 
 	    <div class="back container">
-	      <h1>보험 사기자 탐색 시스템</h1> 
+	      <h1>보험 사기자 판별 시스템</h1> 
 		  <div align="center" class="col-md-14">
 			<table class="table">
 			  <thead class="table-primary">
@@ -51,7 +51,7 @@
 			      <td scope="col" align="center">고객 번호</td>
 			      <td scope="col" align="center">청구 횟수</td>
 			      <td scope="col" align="center">청구 정보 입력</td>
-			      <td scope="col" align="center">사기꾼 탐색하기</td>
+			      <td scope="col" align="center">사기꾼 판별하기</td>
 			    </tr>
 			  </thead>
 			  <tbody id="custBody">
@@ -64,7 +64,7 @@
 			        <td align="center">
 			          <button class="claimBtn btn btn-outline-primary" value="${cust.custId}">입력</button>
 			        </td>
-			        <td align="center"><button class="searchBtn btn btn-outline-primary" value="${cust.custId}" id="">탐색</button></td>
+			        <td align="center"><button class="searchBtn btn btn-outline-primary" value="${cust.custId}" id="">판별</button></td>
 			      </tr>
 			    </c:forEach>
 			  </tbody>
@@ -158,7 +158,7 @@
 			
 	  </c:if>
 	</section>
-	<!-- End 보험 사기자 탐색 서비스 Section -->
+	<!-- End 보험 사기자 판별 서비스 Section -->
 
   </main><!-- End #main -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
@@ -322,26 +322,6 @@ $(".claimBtn").on("click",function(){
               }]
  
           });
-        /*     $('#container2 .highcharts-title').click(function(e)
-                    {    
-                    
-                       $('#popupLayer').prop("display", "block");
-                       var sWidth = window.innerWidth;
-                       var sHeight = window.innerHeight;
-
-                       var oWidth = $('#popupLayer').width();
-                       var oHeight = $('#popupLayer').height();
-
-                       // 레이어가 나타날 위치를 셋팅한다.
-                       var divLeft = e.clientX;
-                       var divTop = e.clientY;
-                    
-                       $('#popupLayer').css({
-                          "top": divTop,
-                          "left": divLeft,
-                          "position": "absolute"
-                       })
-                    });  */ 
             $("#container2 .highcharts-title").hover(function(){
       
             	$(this).attr('class','d-inline-block');

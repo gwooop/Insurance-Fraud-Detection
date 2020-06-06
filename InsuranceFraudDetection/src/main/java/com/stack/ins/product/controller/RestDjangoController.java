@@ -45,7 +45,7 @@ public class RestDjangoController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-    		return "안안댐";
+    		return "안돼요";
   
     }
     

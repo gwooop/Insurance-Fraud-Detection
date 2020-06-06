@@ -636,12 +636,8 @@ $("#areabtn").hover(function(){
 	               litres: 306
 	             },
 	             {
-	               country: "경남",
+	               country: "부산",
 	               litres: 198
-	             },
-	             {
-	               country: "부산 ",
-	               litres: 181
 	             },
 	             {
 	               country: "인천",
@@ -1588,7 +1584,7 @@ $("#dangerHos").on("click",function(){
 	      
 	      chart.data = [{
 	          "name": "100%",
-	          "value": 62 
+	          "value": 1135
 	      }, {
 	          "name": "80%~100%",
 	          "value": 237 
@@ -1626,7 +1622,7 @@ $("#dangerHos").on("click",function(){
 	   // 주의 병원 top5 
 	   emptyContent(3);
 	   $("#selectArea2").css("display","none");
-	   $("#chartText_sub2").append("사기자와 많이 가담한 병원 TOP5")
+	   $("#chartText_sub2").append("과진료 등으로 의료 과다 청구가 에상되는 병원 Top5");
 	   
 	   am4core.ready(function() {
 
@@ -1904,7 +1900,7 @@ $("#dangerDocAndHos").on("click",function(){
       });
    emptyContent(2); 
    $("#selectArea2").css("display","none")
-   $("#chartText_sub").append("사기자와 많이 가담한 의사 TOP5")
+   $("#chartText_sub").append("과진료 등으로 의료 과다 청구가 에상되는 의사 Top5");
    
    am4core.ready(function() {
 
