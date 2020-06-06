@@ -27,6 +27,13 @@ def pickle_load_xgb():
     model = joblib.load(file_name)
     return model
 
+def pickle_load_mlp():
+
+    file_name = 'mlp_model.pkl'
+    model = joblib.load(file_name)
+    return model
+
+
 # 고객 입력 데이터 예측하기
 def cust_predict(cust, cust_id, model):
     test = cust[cust['CUST_ID'] == cust_id]

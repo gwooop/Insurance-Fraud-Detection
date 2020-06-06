@@ -36,38 +36,32 @@ def ins(request, cust_id):
         result = cursor.fetchall()
         claim = pd.DataFrame(result)
 
-    # 데이터 정규화
-    cust = data_processing.standardization(cust, claim)
-    # test = cust[cust['DIVIDED_SET']==2].reset_index(drop=True)#.sample(n=10)
-    # test.drop('DIVIDED_SET', axis=1, inplace=True)
-    # test_X =test.drop(['CUST_ID', 'SIU_CUST_YN'], axis=1)
-    # testtest = test_X.iloc[-1:,:]
-    # print(test.tail())
-    # print(testtest)
-    
+
+
     # 모델별 피클 파일 저장
     voting_model = cust_prediction.pickle_load_voting()
     svm_model = cust_prediction.pickle_load_svm()
     rf_model = cust_prediction.pickle_load_rf()
     xgb_model = cust_prediction.pickle_load_xgb()
-
+    mlp_model = cust_prediction.pickle_load_mlp()
     # # 변수 중요도 확인
-    # data_processing.importance(testtest, rf_model)
-    
+
+    # 데이터 정규화
+    cust = data_processing.standardization(cust, claim)
     # 모델 결과 예측
     voting_result = cust_prediction.cust_predict(cust, cust_id, voting_model)
     svm_result = cust_prediction.cust_predict(cust, cust_id, svm_model)
     xgb_result = cust_prediction.cust_predict(cust, cust_id, xgb_model)
     rf_result = cust_prediction.cust_predict(cust, cust_id, rf_model)
-
+    mlp_result = cust_prediction.cust_predict(cust, cust_id, mlp_model)
     # Restful 넘기는 모델 값 저장
     resultList = []
     resultList.append(voting_result)
     resultList.append(svm_result)
     resultList.append(xgb_result)
     resultList.append(rf_result)
+    resultList.append(mlp_result)
     resultList = json.dumps(resultList)
     # result = result.to_json(orient='records')
     return HttpResponse(resultList)
-
 
