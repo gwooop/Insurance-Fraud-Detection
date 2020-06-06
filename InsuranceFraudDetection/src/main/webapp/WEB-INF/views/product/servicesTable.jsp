@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link href="<c:url value='/assets/css/product/style.css'/>" rel="stylesheet"/>
 <style>
 .pagination {
@@ -31,7 +32,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Our Services</h2>
           <ol>
-            <li><a href="../../">Home</a></li>
+            <li><a href="../">Home</a></li>
             <li>${sessionScope.userId}님환영합니다</li>
           </ol>
         </div>
@@ -42,7 +43,9 @@
     <section class="services">
 	  <c:if test="${not empty sessionScope.userId}"> 
 	    <div class="back container">
+
 	      <h1>보험 사기자 판별 시스템</h1> 
+
 		  <div align="center" class="col-md-14">
 			<table class="table">
 			  <thead class="table-primary">
@@ -115,7 +118,7 @@
 					</div>
 		  		</div>
 			</div>
-		<div class="row" >
+		<div class="row">
 	      <div class="col-md-5">
 	        <figure class="highcharts-figure">
 	          <div id="container"></div>
@@ -127,7 +130,7 @@
 	        <div class="row">
 	          <div class="col-xs-1 col-sm-4">
 	       	    <figure class="highcharts-figure">
-	              <div id="container2" style="height:320px"></div>
+	              <div id="container2" style="height:320px"></div>	
 	            </figure>
 	          </div>
 	          <div class="col-xs-1 col-sm-4">
@@ -152,15 +155,43 @@
 	 	<div id="chartdiv2" style="width: 100%;height: 450px;"></div>   
 		<div class="container show-grid">
 		  <div class="wrap-loading display-none">
-	    	<div><img src="<c:url value='/assets/img/product/100.gif'/>" /></div>
+	    	<div><img src="<c:url value='/assets/img/product/100.gif'/>"/></div>
 		  </div> 		
 		</div>	   
 			
 	  </c:if>
+	  <!-- 폼 레이어  -->
+	  <div id="votingpopupLayer" style="display:none">
+	  	<img src="<c:url value='/assets/img/product/voting_classifier.png'/>"/><br>
+		VotingClassifier<br>
+		여러 모델을 생성하고 그 결과를 비교한다. 각 모델의 예측을 평균내어 예측하는 알고리즘
+	  </div>
+	  <div id="svmpopupLayer" style="display:none">
+	  	<img src="<c:url value='/assets/img/product/svm_.png'/>"/><br>
+		Support Vector Machine<br>
+		두 집단 중 어느 하나에 속한 데이터의 집합이 주어졌을 때, SVM는 새로운 데이터가 어느 집단에 속할지 판단하는 알고리즘
+	  </div>
+  	  <div id="xgbpopupLayer" style="display:none">
+  	  	<img src="<c:url value='/assets/img/product/xgboost_.png'/>"/><br>
+		XGBOOST<br>
+		모델 예측의 오답에 대해 높은 가중치를 부여하고, 정답에 대해 낮은 가중치를 부여하는 알고리즘
+	  </div>
+  	  <div id="rfpopupLayer" style="display:none">
+  	  	<img src="<c:url value='/assets/img/product/random_forest.png'/>"/><br>
+		Random Forest<br>
+		여러 결정 트리들이 내린 예측 값들 중 가장 많이 나온 값을 최종 예측값으로 정하는 알고리즘 
+	  </div>
+	  <div id="mlppopupLayer" style="display:none">
+	  	<img src="<c:url value='/assets/img/product/mlp_.png'/>"/><br>
+	  	MLPClassifier(인공신경망)<br>	
+	  	다층 퍼셉트론을 활용해 입력계층과 출력계층 사이에 은닉계층을 추가해 복잡한 문제를 해결하는 알고리즘
+	  </div>
+	  
+	  <!-- //폼 레이어  -->
 	</section>
 	<!-- End 보험 사기자 판별 서비스 Section -->
-
   </main><!-- End #main -->
+  
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <jsp:include page="/WEB-INF/views/include/staticJsp.jsp"/>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -187,6 +218,7 @@ $(".claimBtn").on("click",function(){
       var td = tr.children();
       var custId = td.eq(1).text();
       console.log(custId)
+            
       $.ajax({
          url:"<c:url value='/restTest/'/>"+custId,
          type:"GET",
@@ -212,6 +244,7 @@ $(".claimBtn").on("click",function(){
             data4 = JSON.parse(result[3])
         	data5 = JSON.parse(result[4])
         	console.log(data5)
+        	
         	/* VotingClass */
             Highcharts.chart('container', {
               chart: {
@@ -233,10 +266,10 @@ $(".claimBtn").on("click",function(){
               accessibility: {
                   point: {
                       valueSuffix: '%'
-                  }
+                  }	
               },
               plotOptions: {
-                  pie: {
+                  pie: {	
                       allowPointSelect: true,
                       cursor: 'pointer',
                       colors: pieColors,
@@ -272,6 +305,26 @@ $(".claimBtn").on("click",function(){
               
               }]
           });
+            
+            $('#container .highcharts-title').hover(function(e){
+        		$('#votingpopupLayer').css("display", "block")
+        		var sWidth = window.innerWidth;
+        		var sHeight = window.innerHeight;
+
+        		// 레이어가 나타날 위치를 셋팅한다.
+        		var divLeft = e.pageX;
+        		var divTop = e.pageY;
+				
+        		$('#votingpopupLayer').css({
+        			"top": divTop,
+        			"left": divLeft,
+        			"position": "absolute"
+        		}).show();
+            }, function(){
+            	$('#votingpopupLayer').hide();
+            	
+            });
+            
             /* SVM */
             Highcharts.chart('container2', {
               chart: {
@@ -322,13 +375,24 @@ $(".claimBtn").on("click",function(){
               }]
  
           });
-            $("#container2 .highcharts-title").hover(function(){
-      
-            	$(this).attr('class','d-inline-block');
-            	$(this).attr('title', '안녕하세요 이것은 svm 이라는 것이에요 ㅎㅎ');
-            	$(this).attr('data-toggle',"tooltip")
-            })
-            
+                       
+            $('#container2 .highcharts-title').hover(function(e){
+        		$('#svmpopupLayer').css("display", "block")
+        		var sWidth = window.innerWidth;
+        		var sHeight = window.innerHeight;
+
+        		// 레이어가 나타날 위치를 셋팅한다.
+        		var divLeft = e.pageX;
+        		var divTop = e.pageY;
+				
+        		$('#svmpopupLayer').css({
+        			"top": divTop,
+        			"left": divLeft,
+        			"position": "absolute"
+        		}).show();
+            }, function(){
+            	$('#svmpopupLayer').hide()
+            });
             
             /*  XGBOOST */
             Highcharts.chart('container3', {
@@ -380,6 +444,27 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
+                    
+            $('#container3 .highcharts-title').hover(function(e)
+            	{
+            		$('#xgbpopupLayer').css("display", "block")
+            		var sWidth = window.innerWidth;
+            		var sHeight = window.innerHeight;
+
+            		// 레이어가 나타날 위치를 셋팅한다.
+            		var divLeft = e.pageX;
+            		var divTop = e.pageY;
+    				
+            		$('#xgbpopupLayer').css({
+            			"top": divTop,
+            			"left": divLeft,
+            			"position": "absolute"
+            		}).show();
+                }, function(){
+                	$('#xgbpopupLayer').hide()
+                });
+           // -----
+           
            /* RANDOM FOREST */
             Highcharts.chart('container4', {
               chart: {
@@ -390,6 +475,7 @@ $(".claimBtn").on("click",function(){
               },
               title: {
                   text: "Random Forest",
+                  useHTML:true,
                   style: {
                       color: '#007bff',
                       fontWeight: 100,
@@ -429,6 +515,27 @@ $(".claimBtn").on("click",function(){
                   ]
               }]
           });
+           
+            $('#container4 .highcharts-title').hover(function(e)
+            	{
+            		$('#rfpopupLayer').css("display", "block")
+            		var sWidth = window.innerWidth;
+            		var sHeight = window.innerHeight;
+
+            		// 레이어가 나타날 위치를 셋팅한다.
+            		var divLeft = e.pageX;
+            		var divTop = e.pageY;
+    				
+            		$('#rfpopupLayer').css({
+            			"top": divTop,
+            			"left": divLeft,
+            			"position": "absolute"
+            		}).show();
+                }, function(){
+                	$('#rfpopupLayer').hide()
+                });
+         $("#textArea").empty() 
+
            /* 인공신경망 */
             am4core.ready(function() {
 				
@@ -598,11 +705,31 @@ $(".claimBtn").on("click",function(){
             		chart.cursor = new am4charts.XYCursor();
             		chart.cursor.behavior = "panX";
 
-            		}); // end am4core.ready()    	
+            		}); // end am4core.ready()    
+            		
+                    $('#chartText').hover(function(e)
+                        	{
+                        		$('#mlppopupLayer').css("display", "block")
+                        		var sWidth = window.innerWidth;
+                        		var sHeight = window.innerHeight;
+
+                        		// 레이어가 나타날 위치를 셋팅한다.
+                        		var divLeft = e.pageX;
+                        		var divTop = e.pageY;
+                				
+                        		$('#mlppopupLayer').css({
+                        			"top": divTop,
+                        			"left": divLeft,
+                        			"position": "absolute"
+                        		}).show();
+                            }, function(){
+                            	$('#mlppopupLayer').hide()
+                            });
 			            	
             	
             	
        $("#textArea").empty() 
+
       if(data[0]["SIU_CUST_YN"] ==0){
          $("#textArea").append("<h2> 일반인일 확률이 더 높습니다. </h2>")
       

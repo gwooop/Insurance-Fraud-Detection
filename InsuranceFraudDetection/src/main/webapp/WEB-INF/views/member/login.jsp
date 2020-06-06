@@ -74,7 +74,7 @@
     	<div class="col-sm-offset-2 col-sm-8">
 		<input type="submit" class="btn btn-info btn-lg btn-block" value="로그인" id="login">
 		<a href="<c:url value='/member/insert'/>" class="btn btn-primary btn-lg btn-block">회원 가입</a>
-		<div class="g-signin2 " data-onsuccess="onSignIn" data-theme="dark"></div>
+		<!-- <div class="g-signin2 " data-onsuccess="onSignIn" data-theme="dark"></div> -->
 		</div>
 		
 	</div>
@@ -122,33 +122,6 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
-<%--  <div class="card mb-3" style="max-width: 860;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="<c:url value="/assets/img/comments-2.jpg"/>" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-         <ul class="list-group list-group-flush">
-    		<li class="list-group-item"><strong>${userId}</strong></li>
-    		<li class="list-group-item">이름 :${name}</li>
-    		<li class="list-group-item">email :${email}</li>
-    		<li class="list-group-item">생일 :<fmt:formatDate value="${birth}" pattern="yyyy-MM-dd"/></li>
-  		</ul>
- 		 <div class="card-body" align="right">
-			<a class ="btn btn-info center" href="<c:url value='/member/update'/>">수정하기</a>
-			<a class ="btn btn-info center" href="<c:url value='/member/logout'/>">로그 아웃</a>
-			<a class ="btn btn-danger center"  href="<c:url value='/member/delete'/>">삭제하기</a>
-  		</div>
-      </div>
-    </div>
-  </div>
-</div>  --%>
 <!--홈페이지 사인아웃 -->
 
   </div>
