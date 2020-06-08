@@ -1,5 +1,6 @@
 # Maria DB
-Maria DB 에 sql 파일 import 하기
+Maria DB 에  DataBase 폴더에 있는 MariaDB 
+sql 파일 import 하기
 # 장고
 1. 파이참을 설치
 2. 파이참 VCS -> Get from Version Control -> https://github.com/gwooop/Insurance-Fraud-Detection 입력 후 받아옴 
