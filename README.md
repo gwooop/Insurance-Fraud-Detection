@@ -12,7 +12,8 @@ sql 파일 import 하기
 ORACLE DB 에 DataBase 폴더에 있는 ORACLE-2 sql 파일 import 하기
 (안되면) ORACLE sql 파일로
 
-# 스프링 
+# 스프링
+이클립스 설치 
 1. Clone Git Repository-> https://github.com/gwooop/Insurance-Fraud-Detection  입력후 받아옴
 2. Switch To ->  other -> spring_semi -> check_out -> 실행
 
