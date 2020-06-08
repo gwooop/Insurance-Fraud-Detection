@@ -1,4 +1,4 @@
 # Insurance-Fraud-Detection
 
-Spring
-Django
+장고 시작시 
+pip install -r requirements.tx
