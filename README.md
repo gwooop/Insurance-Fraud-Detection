@@ -27,11 +27,11 @@ ORACLE DB 에 DataBase 폴더에 있는 ORACLE-2 sql 파일 import 하기
 
 ## DB 정보
 <오라클>
-jdbc.username=hr
-jdbc.password=hr
+- jdbc.username=hr
+- jdbc.password=hr
 
 <마리아 DB>
-majdbc.url=jdbc:mariadb://127.0.0.1:3306/insurance_data
-majdbc.username=root
-majdbc.password=1234
+- majdbc.url=jdbc:mariadb://127.0.0.1:3306/insurance_data
+- majdbc.username=root
+- majdbc.password=1234
 
