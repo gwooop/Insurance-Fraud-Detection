@@ -69,10 +69,12 @@ majdbc.password=1234
 브라우저 주소는 http://localhost:8080/ins/member/login
 
 
-보험 판별 프로젝트 실행 순서
-장고 서버를 먼저 킨다.
-스프링 서버를 킨다.
-스프링 서버에서 돌아가는 호스트 URL 로 접속한다.
-service 에 들어가 잘되나 확인한다.
-관리자 임시 아이디/비밀번호 : admin/admin
+## 보험 판별 프로젝트 실행 순서
+1. 장고 서버를 먼저 킨다.
+2. 스프링 서버를 킨다.
+3. 스프링 서버에서 돌아가는 호스트 URL 로 접속한다.
+4. service 에 들어가 잘되나 확인한다.
+5. 관리자 임시 아이디/비밀번호 : admin/admin
 
+## 간단한 시연 
+[![kosongs Youtube](https://i9.ytimg.com/vi/qEVJKzUWWvM/mq1.jpg?sqp=CMC2u_cF&rs=AOn4CLCUb2DPRb0XhzjP9S9Zc7Z5n5IRpg)](https://www.youtube.com/watch?v=qEVJKzUWWvM)
