@@ -77,4 +77,4 @@ majdbc.password=1234
 5. 관리자 임시 아이디/비밀번호 : admin/admin
 
 ## 간단한 시연 
-[![kosongs Youtube](https://i9.ytimg.com/vi/qEVJKzUWWvM/mq1.jpg?sqp=CMC2u_cF&rs=AOn4CLCUb2DPRb0XhzjP9S9Zc7Z5n5IRpg)](https://www.youtube.com/watch?v=qEVJKzUWWvM)
+[![kosongs Youtube](https://i9.ytimg.com/vi/qEVJKzUWWvM/mq1.jpg?sqp=CLiAwPcF&rs=AOn4CLCKz1CcEWX2AMZknpmtt4DbC-WfGw)](https://www.youtube.com/watch?v=qEVJKzUWWvM)
