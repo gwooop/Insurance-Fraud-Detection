@@ -4,7 +4,7 @@ imbalanced-learn==0.6.2
 imblearn==0.0
 joblib==0.14.1
 mysqlclient==1.4.6
-numpy==1.18.3
+numpy==1.22.0
 pandas==1.0.3
 PyMySQL==0.9.3
 python-dateutil==2.8.1
