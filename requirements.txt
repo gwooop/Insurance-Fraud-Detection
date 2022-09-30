@@ -2,7 +2,7 @@ asgiref==3.2.7
 Django==3.0.5
 imbalanced-learn==0.6.2
 imblearn==0.0
-joblib==0.14.1
+joblib==1.2.0
 mysqlclient==1.4.6
 numpy==1.18.3
 pandas==1.0.3
